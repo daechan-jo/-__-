@@ -16,9 +16,14 @@
     property="og:description"
     content="조대찬입니다"
   />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
   <meta property="og:image" content="https://daechan-jo.github.io/-__-/favicon.ico"/>
   <meta property="og:url" content="https://daechan-jo.github.io/-__-/"/>
   <meta property="og:type" content="website"/>
+
   <title>포트폴리오</title>
   <style>
     body {
@@ -39,7 +44,9 @@
       --link-hover-bg: #333333;
       --link-hover-color: #ffffff;
       --border-color: #333333;
-      --highlight-color: #5971ae
+      --highlight-color: #5971ae;
+      --h4-bg-color: #f0f0f0;
+      --p-text-color: #666666;
     }
 
     body.dark-mode {
@@ -49,7 +56,9 @@
       --link-hover-bg: #ffffff;
       --link-hover-color: #333333;
       --border-color: #ffffff;
-      --highlight-color: #5971ae
+      --highlight-color: #5971ae;
+      --h4-bg-color: #444444;
+      --p-text-color: #bbbbbb;
     }
 
     header {
@@ -73,8 +82,9 @@
       color: var(--text-color);
     }
 
+
     .content {
-      max-width: 900px;
+      max-width: 60%;
       margin: 0 auto 50px;
       padding: 20px 20px 50px;
     }
@@ -86,13 +96,19 @@
     }
 
     .content h3 {
+      background-color: var(--h4-bg-color);
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .content h4 {
       padding-bottom: 4px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       display: inline-block;
       position: relative;
     }
 
-    .content h3::after {
+    .content h4::after {
       content: '';
       position: absolute;
       left: 0;
@@ -103,15 +119,33 @@
       z-index: -1;
     }
 
+    .content h5 {
+      font-size: 16px;
+      padding-bottom: 4px;
+      margin-bottom: 20px;
+    }
+
+
     .content p {
       text-align: left;
       font-size: 1em;
-      color: var(--text-color);
+      line-height: 1.6;
+      color: var(--p-text-color);
     }
 
     .content section {
       margin-top: 40px;
     }
+
+    pre code {
+      display: block;
+      padding: 10px;
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+
 
     .sidebar {
       position: fixed;
@@ -222,21 +256,6 @@
       }
     }
 
-    .tech-stack {
-      margin-top: 20px;
-    }
-
-    .tech-stack h4 {
-      font-size: 1.2em;
-      margin-bottom: 10px;
-    }
-
-    .tech-stack p {
-      font-size: 1em;
-      color: var(--text-color);
-      margin-bottom: 20px;
-    }
-
     .cicd-container {
       display: flex;
       align-items: flex-start;
@@ -257,34 +276,7 @@
       flex: 1;
     }
 
-    .log-container img {
-      max-width: 100%;
-      height: auto;
-      margin-right: 20px;
-    }
-
-    .tech-aws img {
-      max-width: 100%;
-      height: auto;
-      margin-right: 20px;
-    }
-
-    .repository-pattern img {
-      max-width: 100%;
-      height: auto;
-      margin-right: 20px;
-    }
-
-    .ioc, .repository-pattern {
-      width: 100%;
-    }
-
-    .ioc img, .repository-pattern img {
-      width: 100%;
-      height: auto;
-    }
-
-    .rolling_bluegreen img {
+    img {
       width: 100%;
       height: auto;
     }
@@ -299,7 +291,7 @@
       counter-increment: item;
       margin-bottom: 10px;
       position: relative;
-      padding-left: 30px; /* 숫자가 위치할 공간 확보 */
+      padding-left: 30px;
     }
 
     .cicd-list li::before {
@@ -314,10 +306,6 @@
       display: inline-block;
     }
 
-    .recommend img {
-      width: 100%;
-      height: auto;
-    }
 
     .caption {
       position: absolute;
@@ -331,40 +319,25 @@
       opacity: 0.7;
     }
 
-    .score img {
-      width: 100%;
-      height: auto;
-    }
-
-    .trgmgin img {
-      width: 100%;
-      height: auto;
-    }
-
-    .cache img {
-      width: 100%;
-      height: auto;
-    }
-
-    .bull img {
-      width: 100%;
-      height: auto;
-    }
-
-    .erd {
+    .relative {
       position: relative;
       display: inline-block;
     }
 
-    .erd img {
-      width: 100%;
-      height: auto;
+    .info-list {
+      margin-left: 20px;
+      margin-bottom: 50px;
     }
 
-    .bcrypt img {
-      width: 100%;
-      height: auto;
+    .info-item {
+      margin-bottom: 2px;
     }
+
+    .info-item2 {
+      margin-left: 15px;
+      margin-bottom: 5px;
+    }
+
 
   </style>
 </head>
@@ -378,29 +351,34 @@
 <div class="content">
   <section id="projects">
     <section id="overview">
-      <h2>프로젝트 개요</h2>
+      <h2>▣ 프로젝트 개요</h2>
       <section id="project-name">
         <h3>프로젝트 이름 및 소개</h3>
-        <p>LinkedOut은 개인의 성장과 자기 이해를 돕는 에세이 작성 플랫폼입니다. 이 플랫폼은 사용자가 자신의 감정을 온전히 마주할 수 있도록 도와주는 글쓰기 가이드라인과 환경을 제공합니다.
+        <div>LinkedOut은 개인의 성장과 자기 이해를 돕는 에세이 작성 플랫폼입니다. 이 플랫폼은 사용자가 자신의 감정을 온전히 마주할 수 있도록 도와주는 글쓰기 가이드라인과 환경을 제공합니다.
           LinkedOut을 통해 누구나 자유롭고 쉽게 본인만의 에세이를 작성할 수 있습니다. 글쓰기를 통해 감정을 해소하고자 하는 사람들을 위해 설계된 이 서비스는, 단순히 글을 쓰는 것만이 아니라
-          솔직하고 깊은 감정을 글로 표현하는 것을 목표로 합니다.</p>
-        <p>현대인들은 살아가면서 수많은 감정을 느끼지만, 타인의 시선 때문에 자신의 감정을 정확하게 표현하는 데 어려움을 겪습니다. 현재 시중에 나와 있는 많은 '글쓰기' 앱들은 SNS적인 요소가 강해,
-          진솔한 글보다는 타인에게 잘 보이기 위한 꾸며낸 글이 대부분입니다. LinkedOut은 이러한 문제를 해결하기 위해 다음과 같은 특징을 가지고 있습니다:</p>
-        <ul>
-          <li>개인적인 감정과 감상을 솔직하게 표현할 수 있도록 익명성을 보장합니다.</li>
-          <li>사용자 글에 좋아요, 조회수, 스크랩 수 등을 표시하지 않아, 내면의 이야기를 막힘없이 쓸 수 있도록 합니다.</li>
-        </ul>
+          솔직하고 깊은 감정을 글로 표현하는 것을 목표로 합니다.
+        </div>
+        <br>
+        <div>현대인들은 살아가면서 수많은 감정을 느끼지만, 타인의 시선 때문에 자신의 감정을 정확하게 표현하는 데 어려움을 겪습니다. 현재 시중에 나와 있는 많은 '글쓰기' 앱들은 SNS적인 요소가 강해,
+          진솔한 글보다는 타인에게 잘 보이기 위한 꾸며낸 글이 대부분입니다. LinkedOut은 이러한 문제를 해결하기 위해 다음과 같은 특징을 가지고 있습니다:
+        </div>
+        <div class="info-list">
+          <p class="info-item"><strong> • 개인적인 감정과 감상을 솔직하게 표현할 수 있도록 익명성을 보장합니다.</strong></p>
+          <p class="info-item"><strong> • 사용자 글에 좋아요, 조회수, 스크랩 수 등을 표시하지 않아, 내면의 이야기를 막힘없이 쓸 수 있도록 합니다.</strong></p>
+        </div>
       </section>
       <section id="goal">
         <h3>목표</h3>
-        <p>LinkedOut의 주요 목표는 사용자가 자신의 이야기를 솔직하고 자유롭게 공유할 수 있는 공간을 제공하는 것입니다. 이를 통해 다음과 같은 목표를 달성하고자 했습니다.</p>
-        <ul>
-          <li>사용자들이 자신의 감정을 솔직하게 표현하고, 이를 통해 감정을 해소할 수 있도록 지원합니다.</li>
-          <li>진정한 자기 이해와 성장을 돕는 글쓰기 환경을 제공합니다.</li>
-          <li>타인의 시선에서 벗어나 자신의 이야기를 자유롭게 쓸 수 있는 공간을 마련합니다.</li>
-          <li>익명성을 통해 사용자들이 더 솔직하게 자신의 이야기를 풀어낼 수 있도록 합니다.</li>
-          <li>SNS적인 요소를 배제하여 사용자들이 진정성 있는 글을 작성할 수 있게 합니다.</li>
-        </ul>
+        <h4>개인적인 목표</h4>
+        <p>개발자로서의 성장을 멈추지 않고, 실제로 사람들이 사용하는 가치 있는 서비스를 만들고 싶었습니다. 이 프로젝트를 통해 팀을 구성하고 초기 기획을 세우며, 실무 경험과 비슷한 환경에서 협업과 개발
+          과정을 직접 경험하고자 했습니다. 궁극적으로는 개발자로서의 성취감을 얻고 실사용자를 가진 서비스를 만들어내는 것을 목표로 삼았습니다.</p>
+        <br>
+        <h4>기술적 목표</h4>
+        <div class="info-list">
+          <p class="info-item"> • <strong>성능 최적화</strong>: 대용량 트래픽을 효과적으로 처리할 수 있는 백엔드 시스템 설계하기</p>
+          <p class="info-item"> • <strong>안정성과 확장성</strong>: AWS를 활용한 오토스케일링 및 무중단 배포를 통해 시스템의 안정성과 확장성 확보하기</p>
+          <p class="info-item"> • <strong>유지보수성</strong>: 리파지토리 패턴, 모듈화 설계, DI/IoC 등의 설계를 통해 코드의 유지보수성과 재사용성 높이기</p>
+        </div>
       </section>
       <section id="tech-stack">
         <h3>기술스택</h3>
@@ -412,12 +390,12 @@
 
           <h4>TypeORM</h4>
           <p>엔티티를 객체로 관리하여 좀 더 객체지향적인 접근을 가능하게 합니다. 데이터베이스 엔티티와 클래스 간의 매핑을 통해 객체 지향적 데이터베이스 접근이 가능하며, TypeScript와의 호환성이
-            좋고, 코드베이스를 일관성 있게 유지하는 데 유리했습니다. 데이터베이스 스키마를 코드로 정의하고, 특히 마이그레이션을 쉽게 관리할 수 있었습니다.</p>
+            좋고 코드베이스를 일관성 있게 유지하는 데 유리했습니다. 데이터베이스 스키마를 코드로 정의하고 특히 마이그레이션을 쉽게 관리할 수 있었습니다.</p>
 
 
           <h4>PostgreSQL</h4>
-          <p>모든 구성에서 ACID 규정을 준수하며, 이는 트랜잭션의 원자성, 일관성, 고립성, 지속성을 보장해 데이터의 무결성을 유지하기 유리합니다. 또한 동시성 제어를 통해 여러 트랜잭션이 동시에
-            실행될 때도 데이터 일관성을 유지하며 다양한 인덱스 방식을 지원해 효율적이고 빠른 데이터 검색을 가능합니다.</p>
+          <p>모든 구성에서 ACID 규정을 준수하며 이는 트랜잭션의 원자성, 일관성, 고립성, 지속성을 보장해 데이터의 무결성을 유지하기 유리합니다. 또한 동시성 제어를 통해 여러 트랜잭션이 동시에
+            실행될 때도 데이터 일관성을 유지하며 다양한 인덱스 방식을 지원하기 때문에 서비스에서 요구하는 효율적이고 빠른 데이터 검색을 구현하는데 도움이 되었습니다.</p>
 
           <h4>AWS</h4>
           <p>다양한 클라우드 서비스와 복잡한 인프라 설정을 간편하게 관리할 수 있었습니다. 이번 프로젝트에서는 ECS, ECR, RDS, ElastiCache, S3, CodePipeline,
@@ -429,43 +407,58 @@
     <br>
     <br>
     <section id="architecture">
-      <h2>아키텍처 및 설계</h2>
+      <h2>▣ 아키텍처 및 설계</h2>
       <section id="architecture-aws">
+
         <h3>AWS 인프라 아키텍처</h3>
         <div class="tech-aws">
           <img alt="아마존 아케틱쳐" src="aws_architecture.png" onclick="window.open(this.src)">
         </div>
-        <p>AWS 인프라는 두 개의 가용 영역을 사용해 구축했습니다. 다음은 주요 특징입니다.</p>
-        <ul>
-          <li>
-            <strong>서브넷 분리</strong>
-            <p>
-              유일한 입구인 인터넷 게이트웨이와 연결되어 있으며, 프라이빗 서브넷과의 연결 통로로만 사용했습니다.<br/>프라이빗 서비넷은 넷게이트웨이를 통해 외부와 연결하고, 내부 네트워크에서만 접근이
-              가능하도록 해 외부로부터 격리되어 보안을 유지했습니다. 이를 통해 보안 그룹과 네트워크 ACL을 통해 보안을 더욱 강화할 수 있었습니다.
-            </p>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong>수평적 확장성 및 고가용성</strong>
-            <p>
-              로드밸런서와 ECS를 활용해 트래픽 변화에 유동적으로 대응할 수 있도록 구성했습니다.<br/>오토스케일링을 통해 트래픽의 증가나 감소에 따라 자동으로 인스턴스를 추가하거나 제거해 비용을
-              최적화 할 수 있으며 이러한 구조를 통해 서비스의 가용성을 높이고 장애 발생 시 보다 신속하게 대응할 수 있습니다.
-            </p>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong>트래픽 필터링</strong>
-            <p>
-              CloudFront를 사용해 S3 퍼블릭 버킷의 보안을 강화하고 악의적인 트래픽을 필터링합니다.<br/>전 세계에 분포된 엣지 로케이션에서 콘텐츠를 캐싱해 사용자와 더 가까운 위치의 엣지에서
-              콘텐츠를 제공함으로써 지연 시간을 줄이고 성능을 향상시킵니다.<br/>이 캐싱 기능 덕분에 동일한 콘텐츠에 대한 반복적인 요청을 엣지 로케이션에서 처리하여 S3버킷으로의 요청을 줄이기 때문에
-              S3를 단독으로 사용할 때보다 더 빠른 응답 속도를 제공할 수 있었습니다.
-            </p>
-          </li>
-        </ul>
+
+        <h4>고가용성과 수평적 확장성</h4>
+        <div class="info-list">
+          <p class="info-item"><strong>Auto Scaling: </strong>EC2 인스턴스들은 ECS를 사용해 Auto Scaling 그룹으로 구성하여 트래픽 변화에 유동적으로
+            대응하고 서비스의 가용성과 확장성을 높이고자 했습니다.</p>
+          <p class="info-item"><strong>Multi-AZ 배포: </strong>두 개의 가용 영역을 사용해 인스턴스를 배포하여 장애 발생 시에도 서비스가 중단되지 않도록 고가용성을
+            보장했습니다.</p>
+        </div>
+
+        <h4>보안 강화를 위한 네트워크 설계</h4>
+        <div class="info-list">
+          <p class="info-item"><strong>프라이빗 서브넷: </strong>중요한 리소스들은 프라이빗 서브넷에 배치하여 외부로부터 직접 접근이 불가능하게 하고, 퍼블릭 서브넷의 로드
+            밸런서를 통해 트래픽을 분산하여 보안을 강화했습니다.</p>
+          <p class="info-item"><strong>VPC와 서브넷 분리: </strong>VPC 내에서 퍼블릭 및 프라이빗 서브넷을 분리하고 NAT 게이트웨이를 사용해 프라이빗 서브넷의 인스턴스가
+            외부와 통신할 수 있도록 설계했습니다.</p>
+        </div>
+
+        <h4>인프라 관리 및 모니터링</h4>
+        <div class="info-list">
+          <p class="info-item"><strong>AWS 관리형 서비스 활용: </strong>RDS와 ElastiCache 등을 사용하여 데이터베이스 및 캐시 시스템을 관리하고
+            CloudWatch를 활용한 모니터링과 알림 설정으로 시스템의 상태를 실시간으로 파악하고 대응할 수 있도록 했습니다.</p>
+          <p class="info-item"><strong>ECS 기반 컨테이너 관리: </strong>애플리케이션을 컨테이너화하여 ECS로 관리하고 CI/CD 파이프라인을 구축해 배포의 안정성을
+            높였습니다.</p>
+        </div>
+
+        <h4>데이터 보호</h4>
+        <div class="info-list">
+          <p class="info-item"><strong>백업 및 장애 대응: </strong>RDS의 자동 백업 기능과 장애 복구 전략을 통해 데이터 손실에 대비하고, 안정적인 데이터 관리를 목표로
+            했습니다.</p>
+          <p class="info-item"><strong>IAM 및 보안 그룹: </strong>최소 권한의 원칙에 따라 IAM 역할과 보안 그룹을 설정하고 각 리소스에 대한 접근을 철저히 관리했습니다.
+          </p>
+        </div>
+
+        <h4>트래픽 필터링</h4>
+        <div class="info-list">
+          <p class="info-item"><strong>경로 관리와 일관된 URL 제공: </strong>CloudFront를 사용하여 S3 퍼블릭 버킷과 배포된 웹 프론트엔드의 경로 명칭을 명확하게
+            관리하고, 도메인을 통해 일관된 URL 구조를 제공하였습니다.</p>
+          <p class="info-item"><strong>WAF를 통한 보안 강화: </strong>CloudFront를 통해 S3 버킷에 직접 접근하는 것을 제한하고, 악의적인 트래픽과 웹 공격으로부터
+            보호할 수 있는 웹 애플리케이션 방화벽(WAF) 기능을 활용해 보안을 강화하였습니다.</p>
+          <p class="info-item"><strong>트래픽 최적화와 캐싱: </strong>S3에 대한 트래픽을 줄이고, 캐싱을 통해 응답 속도를 최적화할 수 있었습니다.</p>
+        </div>
       </section>
       <br>
+
+
       <section id="design-patterns">
         <h3>주요 설계 패턴</h3>
         <h4>리파지토리 패턴</h4>
@@ -473,102 +466,104 @@
           <img src="repository.png" alt="리포지토리패턴" onclick="window.open(this.src)">
         </div>
         <p>서비스 로직에서 데이터 접근 로직을 다른 레이어로 분리해 추상화하여 결합도를 낮추고, 서비스 로직은 서비스에만 집중할 수 있도록 했습니다. 테스트코드를 보다 편리하게 작성할 수 있으며, 데이터
-          접근 코드가 모듈화되어 유지보수성과 재사용성을 높일 수 있었습니다.</p>
-        <br/>
-        <h4>DI와 IoC, 그리고 싱글톤 패턴과 흐름</h4>
-        <p>NestJS는 의존성 주입(DI)과 제어의 역전(IoC) 원칙을 바탕으로 설계되어 모듈화와 유지보수성을 향상시킬 수 있습니다.</p>
-        <strong>- 의존성 주입 (Dependency Injection)</strong>
-        <p>의존성 주입은 객체가 직접 다른 객체를 생성하지 않고 필요한 의존성을 외부에서 주입받는 디자인 패턴입니다. 이를 통해 클래스 간의 결합도를 낮추고, 코드의 유연성과 재사용성을 높일 수 있습니다.
-          NestJS는 DI를 기본으로 채택하여 서비스, 컨트롤러, 리파지토리 등 다양한 컴포넌트 간의 의존성을 효율적으로 관리할 수 있습니다.</p>
-        <ul>
-          <li>
-            생성자 주입: NestJS는 생성자 주입 방식을 사용해 의존성을 주입합니다. 클래스의 생성자에 필요한 의존성을 선언하면, NestJS의 IoC 컨테이너가 이를 자동으로 주입합니다.
-          </li>
-          <li>데코레이터 사용: `@Injectable()` 데코레이터를 사용해 클래스가 의존성을 주입받을 준비가 되었음을 표시합니다. 이 데코레이터는 클래스가 IoC 컨테이너에 의해 관리되도록
-            합니다.
-          </li>
-        </ul>
+          접근 코드가 모듈화되어 유지보수성과 재사용성을 높일 수 있었습니다.
+        </p>
         <br>
-        <strong>- 제어의 역전 (Inversion of Control)</strong>
+        <h4>DI와 IoC, 그리고 싱글톤 패턴과 흐름</h4>
+
+        <h5>- 의존성 주입 (Dependency Injection)</h5>
+        <p>의존성 주입은 객체가 직접 다른 객체를 생성하지 않고 필요한 의존성을 외부에서 주입받는 디자인 패턴입니다. 이를 통해 클래스 간의 결합도를 낮추고, 코드의 유연성과 재사용성을 높일 수 있습니다.
+          NestJS는 DI를 기본으로 채택하여 서비스, 컨트롤러, 리파지토리 등 다양한 컴포넌트 간의 의존성을 효율적으로 관리했습니다..</p>
+        <div class="info-list">
+          <p class="info-item"><strong>생성자 주입: </strong>NestJS는 생성자 주입 방식을 사용해 의존성을 주입합니다. 클래스의 생성자에 필요한 의존성을 선언하면,
+            NestJS의 IoC 컨테이너가 이를 자동으로 주입합니다.
+          </p>
+          <p class="info-item"><strong>데코레이터 사용: </strong><code>@Injectable()</code> 데코레이터를 사용해 클래스가 의존성을 주입받을 준비가 되었음을
+            표시합니다. 이
+            데코레이터는 클래스가 IoC
+            컨테이너에 의해 관리되도록 합니다.
+          </p>
+        </div>
+
+        <h5>- 제어의 역전 (Inversion of Control)</h5>
         <p>객체의 생성과 생명 주기를 개발자가 아닌 프레임워크나 컨테이너가 관리하는 디자인 원칙으로 NestJS는 IoC 컨테이너를 사용하여 애플리케이션의 객체를 생성하고 의존성을 주입하며, 객체의 생명
           주기를 관리합니다. 이를 통해 객체 생성 및 관리에 신경 쓰지 않고 비즈니스 로직에 집중할 수 있습니다.</p>
-        <ul>
-          <li>
-            IoC 컨테이너: IoC 컨테이너는 애플리케이션이 시잘될 때 필요한 모든 의존성을 인스턴스화하고 주입합니다.
-          </li>
-          <li>
-            모듈 시스템: `@Module()` 데코레이터를 사용하여 모듈을 정의합니다. 모듈은 NestJS 애플리케이션의 기본 구성 단위로, 특정 기능과 관련된 프로바이더(서비스, 리포지토리 등)를
+        <div class="info-list">
+          <p class="info-item"><strong>IoC 컨테이너: </strong>IoC 컨테이너는 애플리케이션이 시잘될 때 필요한 모든 의존성을 인스턴스화하고 주입합니다.</p>
+          <p class="info-item"><strong>모듈 시스템: </strong>
+            <code>@Module()</code> 데코레이터를 사용하여 모듈을 정의합니다. 모듈은 NestJS 애플리케이션의 기본 구성 단위로, 특정 기능과 관련된 프로바이더(서비스, 리포지토리 등)를
             그룹화합니다. 이렇게 정의된 모듈은 IoC 컨테이너에 등록되어 의존성 주입을 통해 다른 모듈이나 컴포넌트에서 사용할 수 있습니다.
-          </li>
-        </ul>
-        <br>
-        <strong>- 싱글톤 패턴 (Singleton Pattern)</strong>
+          </p>
+        </div>
+
+        <h5>- 싱글톤 패턴 (Singleton Pattern)</h5>
         <p>싱글톤 패턴은 특정 클래스의 인스턴스가 하나만 생성되고, 애플리케이션 전체에서 동일한 인스턴스를 공유하도록 하는 디자인 패턴입니다. NestJS는 기본적으로 프로바이더를 싱글톤으로 관리하기 때문에
           메모리를 효율적으로 관리하고 상태를 공유하는데 유용했습니다.</p>
-        <ul>
-          <li>
-            싱글톤 프로바이더: @Injectable() 데코레이터를 사용하여 정의된 모든 프로바이더는 기본적으로 싱글톤으로 동작합니다. 따라서 동일한 프로바이더 인스턴스가 애플리케이션 전체에서
+        <div class="info-list">
+          <p class="info-item"><strong>싱글톤 프로바이더: </strong>
+            <code>@Injectable()</code> 데코레이터를 사용하여 정의된 모든 프로바이더는 기본적으로 싱글톤으로 동작합니다. 따라서 동일한 프로바이더 인스턴스가 애플리케이션 전체에서
             재사용됩니다.
-          </li>
-          <li>
-            상태 공유: 싱글톤 프로바이더는 애플리케이션 내에서 상태를 공유하는 데 유용합니다. 예를 들어 하나의 데이터베이스 연결을 여러 서비스에서 공유할 수 있습니다.
-          </li>
-        </ul>
+          </p>
+          <p class="info-item"><strong>상태 공유: </strong>싱글톤 프로바이더는 애플리케이션 내에서 상태를 공유하는 데 유용합니다. 예를 들어 하나의 데이터베이스 연결을 여러
+            서비스에서 공유할 수 있습니다.</p>
+        </div>
+
         <br/>
         <strong>- 흐름 (예시: 로그인)</strong>
         <div class="ioc">
           <img alt="ioc" src="nestjs_ioc.png" onclick="window.open(this.src)">
         </div>
         <br>
-        <strong>IoC 컨테이너 설정</strong>
-        <ul>
-          <li>애플리케이션이 시작되면 IoC 초기화 단계에서 모든 모듈의 의존성 설정이 IoC 컨테이너에 등록됩니다.</li>
-          <li>최상위 모듈인 `AppModule`이 초기화되며, 여기서 데이터베이스 및 Redis와 같은 전역적으로 필요한 의존성들이 설정됩니다.</li>
-          <li>`AuthModule`과 `UserModule`이 `AppModule`에 의해 임포트되어 의존성이 설정되고, 각 모듈 내의 컨트롤러와 서비스, 리포지토리 등이 `providers`로 등록되어
-            IoC 컨테이너에 의해 싱글톤 인스턴스로 생성/관리 됩니다.
-          </li>
-          <li>로그인 위한 라우터가 `AuthModule`에 있고, 요청을 처리하기 위해 `UserModule`의 서비스 의존성이 필요하다고 가정할 때 `UserModule`을 `AuthModule`에
+        <h5>IoC 컨테이너 설정</h5>
+        <div class="info-list">
+          <p class="info-item"> • 애플리케이션이 시작되면 IoC 초기화 단계에서 모든 모듈의 의존성 설정이 IoC 컨테이너에 등록됩니다.</p>
+          <p class="info-item"> • 최상위 모듈인 `AppModule`이 초기화되며, 여기서 데이터베이스 및 Redis와 같은 전역적으로 필요한 의존성들이 설정됩니다.</p>
+          <p class="info-item"> • `AuthModule`과 `UserModule`이 `AppModule`에 의해 임포트되어 의존성이 설정되고, 각 모듈 내의 컨트롤러와 서비스, 리포지토리
+            등이 `providers`로 등록되어 IoC 컨테이너에 의해 싱글톤 인스턴스로 생성/관리 됩니다.
+          </p>
+          <p class="info-item"> • 로그인을 위한 라우터가 `AuthModule`에 있고, 요청을 처리하기 위해 `UserModule`의 서비스 의존성이 필요하다고 가정할 때
+            `UserModule`을 `AuthModule`에
             임포트하여 의존성을 설정합니다.
-          </li>
-        </ul>
-        <br>
-        <strong>로그인 요청 처리</strong>
-        <ul>
-          <li>클라이언트의 로그인 요청이 `AuthController`로 들어옵니다.</li>
-          <li>`AuthController`는 주입된 `AuthService`를 사용해 요청을 처리합니다.</li>
-          <li>`AuthService`는 요청을 처리하는 과정에서 `UserService`를 주입받아 사용하며, `UserService`는 `UserRepository` 와 외부 API에 의존해 요청을
+          </p>
+        </div>
+
+        <h5>로그인 요청 처리</h5>
+        <div class="info-list">
+          <p class="info-item"> • 클라이언트의 로그인 요청이 `AuthController`로 들어옵니다.</p>
+          <p class="info-item"> • `AuthController`는 주입된 `AuthService`를 사용해 요청을 처리합니다.</p>
+          <p class="info-item"> • `AuthService`는 요청을 처리하는 과정에서 `UserService`를 주입받아 사용하며, `UserService`는 `UserRepository`
+            와 외부 API에 의존해 요청을
             처리하게 됩니다.
-          </li>
-        </ul>
+          </p>
+        </div>
+
       </section>
       <br>
       <section id="erd">
-        <h3>ERD</h3>
-        <div class="erd">
+        <h4>ERD</h4>
+        <div class="relative">
           <img src="erd.png" alt="erd" onclick="window.open(this.src)">
           <span class="caption">클릭 시 원본 크기로 보실 수 있습니다.</span>
         </div>
-        <ul>
-          <li>
-            <strong>User Table</strong>
-            <p>사용자 정보를 저장하면서 다른 주요 테이블과 밀접하게 연결되어있는 테이블입니다. 사용자의 기본 정보와 상태를 관리하며, 다양한 기능과 연결된 데이터를 저장합니다. 사용자와 관련된 모든
-              활동이 이 테이블을 통해 연결됩니다.
-            </p>
-          </li>
-          <li>
-            <strong>Essay Table</strong>
-            <p>
-              사용자가 작성한 에세이를 저장하고 관리하는 핵심 테이블입니다. 에세이에 포함된 태그와의 관계를 관리하고 조회 이력, 북마크 정보와 같이 관계된 정보를 저장하여 사용자의 활동을 추적합니다.
-            </p>
-          </li>
-          <li>
-            <strong>ProcessedHistory Table</strong>
-            <p>
-              이용자와 어드민의 주요 활동 내역을 모두 기록하는 테이블입니다. 신고 처리 내역, 리뷰 승인/거절 내역, 관리자의 공지 생성 및 처리 내역과 문의 처리 내역 등을 기록하여 원할한 서비스
-              운영과 관리자들의 업무 투명성을 제공합니다.
-            </p>
-          </li>
-        </ul>
+        <h3>주요 테이블</h3>
+        <div class="info-list">
+          <p class="info-item"><strong>User Table</strong></p>
+          <p class="info-item2">사용자 정보를 저장하면서 다른 주요 테이블과 밀접하게 연결되어있는 테이블입니다. 사용자의 기본 정보와 상태를 관리하며, 다양한 기능과 연결된 데이터를
+            저장합니다. 사용자와 관련된 모든
+            활동이 이 테이블을 통해 연결됩니다.</p>
+        </div>
+        <div class="info-list">
+          <p class="info-item"><strong>Essay Table</strong></p>
+          <p class="info-item2"> 사용자가 작성한 에세이를 저장하고 관리하는 핵심 테이블입니다. 에세이에 포함된 태그와의 관계를 관리하고 조회 이력, 북마크 정보와 같이 관계된 정보를
+            저장하여 사용자의 활동을 추적합니다.</p>
+        </div>
+        <div class="info-list">
+          <p class="info-item"><strong>ProcessedHistory Table</strong></p>
+          <p class="info-item2">
+            이용자와 어드민의 주요 활동 내역을 모두 기록하는 테이블입니다. 신고 처리 내역, 리뷰 승인/거절 내역, 관리자의 공지 생성 및 처리 내역과 문의 처리 내역 등을 기록하여 원할한 서비스
+            운영과 관리자들의 업무 투명성을 제공합니다.
+          </p>
+        </div>
       </section>
       <br>
     </section>
@@ -576,7 +571,7 @@
     <br>
     <br>
     <section id="main-features">
-      <h2>주요 기능</h2>
+      <h2>▣ 주요 기능</h2>
       <section id="recommend">
         <h3>랜덤 추천 에세이</h3>
         <div class="recommend">
@@ -585,91 +580,83 @@
         </div>
         <br>
         <br>
-        <p>랜덤 추천 에세이 조회 기능은 사용자가 랜덤으로 추천된 에세이 목록을 조회합니다.<br> 이 기능은 사용자가 최근에 조회한 글들의 태그 일치도, 북마크 수, 트렌드 점수, 작성자의 평판 등
+        <p>이 기능은 사용자가 최근에 조회한 글들의 태그 일치도, 북마크 수, 트렌드 점수, 작성자의 평판 등
           사용자의 최근 활동과 선호도 및 여러 가중치를 반영하여 보다 개인화된 추천을 제공합니다. 선택된 에세이의 내용 일부를 추출하여 미리보기를 제공하여 사용자가 에세이의 대략적인 내용을 파악할 수 있도록
           했습니다. 에세이 테이블이 매우 커질 경우, 가중치를 적용한 모든 에세이에서 요청한 에세이 수 만큼 랜덤 선택하는 것은 리소스 효율이 좋지 못했고 레이턴시 또한 길어졌습니다. 따라서 가중치를 적용한
-          상위 1000개의 에세이를 먼저 조회한 후, 이 중에서 랜덤으로 요청된 수 만큼의 에세이를 선택하도록 해서 최적화했습니다.</p>
-        <ul>
-          <li>
-            <strong>최근 활동 기반 태그 수집</strong>
-            <p>사용자가 최근에 본 에세이들의 태그를 수집하여 최근 태그 목록을 만들어 사용자의 현재 관심사를 반영합니다. 예를 들어, 사용자가 최근에 본 에세이들에서 '자기계발', '여행' 등의 태그가
-              있다면, 이 태그들이 최근 태그 목록에 포함됩니다.</p>
-          </li>
-          <li>
-            <strong>가중치 기반 에세이 조회</strong>
-            <p><strong>북마크:</strong> 에세이가 받은 북마크 수가 많을수록 높은 가중치를 받습니다.</p>
-            <p><strong>태그:</strong> 사용자의 최근 태그와 일치하는 태그를 가진 에세이에 가중치를 부여합니다.</p>
-            <p><strong>트렌드:</strong> 에세이의 트렌드 점수는 작성일, 조회수 기반으로 부여되며, 높은 트렌드 점수를 기반으로 가중치를 부여합니다.</p>
-            <p><strong>작성자 평판:</strong> 에세이 작성자의 평판을 기준으로 가중치를 부여합니다.</p>
-          </li>
-          <li>
-            <strong>에세이 필터링</strong>
-            <p><strong>비공개 에세이:</strong> 사용자의 개인정보 보호를 위해 에세이의 상태가 비공개인 경우 조회되지 않도록 필터링합니다.</p>
-            <p><strong>신고된 에세이:</strong> 사용자의 불쾌감을 줄이기 위해, 요청자가 이전에 신고한 에세이는 조회되지 않도록 필터링합니다.</p>
-          </li>
-        </ul>
+          상위 1000개의 에세이를 먼저 조회한 후, 이 중에서 랜덤으로 요청된 수 만큼의 에세이를 선택하도록 해서 최적화했습니다.
+        </p>
+        <div class="info-list">
+          <h4>최근 활동 기반 태그 수집</h4>
+          <p class="info-item">사용자가 최근에 본 에세이들의 태그를 수집하여 최근 태그 목록을 만들어 사용자의 현재 관심사를 반영합니다. 예를 들어, 사용자가 최근에 본 에세이들에서
+            '자기계발', '여행' 등의 태그가
+            있다면, 이 태그들이 최근 태그 목록에 포함됩니다.
+          </p>
+          <br>
+          <h4>가중치 기반 에세이 조회</h4>
+          <p class="info-item"><strong>북마크:</strong> 에세이가 받은 북마크 수가 많을수록 높은 가중치를 받습니다.</p>
+          <p class="info-item"><strong>태그:</strong> 사용자가 읽은 에세이의 최근 태그와 일치하는 태그를 가진 에세이에 가중치를 부여합니다.</p>
+          <p class="info-item"><strong>트렌드:</strong> 에세이의 트렌드 점수는 작성일, 조회수 기반으로 부여되며 높은 트렌드 점수를 기반으로 가중치를 부여합니다.</p>
+          <p class="info-item"><strong>작성자 평판:</strong> 에세이 작성자의 평판을 기준으로 가중치를 부여합니다.</p>
+          <br>
+          <h4>에세이 필터링</h4>
+          <p class="info-item"><strong>비공개 에세이:</strong> 사용자의 개인정보 보호를 위해 에세이의 상태가 비공개인 경우 조회되지 않도록 필터링합니다.</p>
+          <p class="info-item"><strong>신고된 에세이:</strong> 에세이를 신고하는 즉시 해당 에세이는 사용자의 불쾌감을 줄이기 위해, 요청자에게 노출되지 않도록 필터링 됩니다.
+          </p>
+        </div>
+        <br>
       </section>
       <br>
       <section id="score">
         <h3>사용자 평판 및 에세이 트렌드 점수 관리</h3>
         <div class="score">
           <img src="score.png" alt="평판트렌드" onclick="window.open(this.src)">
-          <p>사용자 활동과 에세이의 트렌드 점수를 효율적으로 관리해, 플랫폼의 신뢰성과 사용자 경험을 극대화하고자 했습니다. 평판과 트렌드 점수는 이 서비스의 핵심기능이라 할 수 있는 추천 에세이 조회
+          <p>사용자 활동과 에세이의 트렌드 점수를 관리해서 플랫폼의 신뢰성과 사용자 경험을 극대화하고자 했습니다. 평판과 트렌드 점수는 이 서비스의 핵심기능이라 할 수 있는 추천 에세이 조회
             쿼리에 사용되었습니다.</p>
-          <ul>
-            <li>
-              <strong>사용자 평판 관리</strong>
-              <p><strong>에세이 조회 시 평판 증가: </strong>특정 조휘수에 도달할 때마다 작성자의 평판을 증가시켰습니다. 예를 들어 에세이 조회수가 100의 배수가 될 때마다 평판이 1점
-                증가합니다.</p>
-              <p><strong>에세이 작성 시 평판 증가: </strong>사용자가 주기적으로 에세이를 작성할 때 평판이 증가하도록 했습니다. 최근 일주일 내에 2편 이상 작성하거나, 최근 한 달 내에
-                8편 이상 작성한 경우 평판이 각각 5점씩 증가합니다.</p>
-              <p><strong>북마크 추가 시 평판 증가: </strong>사용자가 에세이를 북마크하면 해당 에세이 작성자의 평판이 증가하고, 에세이의 트렌드 점수도 증가합니다.</p>
-            </li>
+          <br>
+          <div class="info-item">
+            <h4>사용자 평판 관리</h4>
+            <p class="info-item"><strong>에세이 조회 시 평판 증가: </strong>특정 조휘수에 도달할 때마다 작성자의 평판을 증가시켰습니다. 예를 들어 에세이 조회수가 100의
+              배수가 될 때마다 평판이 1점
+              증가합니다.</p>
+            <p class="info-item"><strong>에세이 작성 시 평판 증가: </strong>사용자가 주기적으로 에세이를 작성할 때 평판이 증가하도록 했습니다. 최근 일주일 내에 2편 이상
+              작성하거나, 최근 한 달 내에
+              8편 이상 작성한 경우 평판이 각각 5점씩 증가합니다.</p>
+            <p class="info-item"><strong>북마크 추가 시 평판 증가: </strong>사용자가 에세이를 북마크하면 해당 에세이 작성자의 평판이 증가하고, 에세이의 트렌드 점수도
+              증가합니다.</p>
             <br>
-            <li>
-              <strong>에세이 트렌드 점수 관리</strong>
-              <p>트렌드 점수 계산 로직은 에세이의 인기도를 반영하기 위해 조회 시 점수를 증가시키고, 작성된 날짜에 따라 점수가 감소하도록 설계했습니다. 이를 통해 에세이의 최신성과 인기도를 균형있게
-                유지할 수 있습니다.</p>
-              <p>조회시 증가: 1</p>
-              <p>감쇠 계수: 0.995</p>
-              <p>작성 후 7일 동안은 감쇠를 적용하지 않고, 조회 시 점수만 증가합니다.</p>
-              <p>트렌드 점수는 최소 0 이상으로 유지됩니다.</p>
-              <br>
-              <strong>작성 7일 이내</strong>
-              <ul>
-                <li>
-                  트렌드 점수는 감소하지 않으며, 조회 시마다 1씩 증가합니다.
-                </li>
-                <li>예: 100 -> 101 -> 102 ...</li>
-              </ul>
-              <strong>작성 후 10일째 조회</strong>
-              <ul>
-                <li>
-                  7일동안은 감쇠를 적용하지 않기에, 그 이후로 3일이 감쇠 계수에 적용되어 일별 0.5% 씩 감소합니다.
-                </li>
-                <li>
-                  그래서 7일 이후의 3일 동안의 감소율은 `100 * 0.995^3 ≈ 98.5` 가 됩니다.
-                </li>
-                <li>
-                  만약 에세이의 트렌드 점수가 100이였다고 가정했을 때, 새로운 트렌드 점수는 `98.5` + `1`(조회증가량) = `99.5` -> `99`(소수점 버림) 이 됩니다.
-                </li>
-              </ul>
-              <br>
-              <strong>트렌드 점수 관리를 조회 트리거로 하는 이유</strong>
-              <p>트렌드 점수 관리는 사용자가 에세이를 조회할 대마다 트리거됩니다. 크론 작업을 통한 주기적 업데이트와 비교했을 때 다음과 같은 이점이 있었습니다.</p>
-              <ul>
-                <li>
-                  <strong>효율적인 리소스 사용: </strong>크론 작업은 정해진 시간 간격마다 모든 에세이의 트렌드 점수를 업데이트해야 하므로 서버 리소르를 많이 소모해야 했습니다. 반대로
-                  조회 트리거 방식은 사용자가 실제로 에세이를 조회할 때만 점수를 업데이트하므로 리소스를 보다 효율적으로 사용합니다.
-                </li>
-                <li>
-                  <strong>실시간 반영: </strong>사용자의 활동에 따라 실시간으로 트렌드 점수가 반영되어 더 정확한 인기도 평가가 가능합니다. 이는 사용자 경험을 향상시키고 최신 정보를
-                  제공하는데 유리합니다.
-                </li>
-              </ul>
-            </li>
-          </ul>
+
+            <h4>에세이 트렌드 점수 관리</h4>
+            <p class="info-item">트렌드 점수 계산 로직은 에세이의 인기도를 반영하기 위해 조회 시 점수를 증가시키고, 작성된 날짜에 따라 점수가 감소하도록 설계했습니다. 이를 통해 에세이의
+              최신성과 인기도를 균형있게
+              유지할 수 있습니다.</p>
+            <p class="info-item2"><strong>조회시 증가율:</strong>1</p>
+            <p class="info-item2"><strong>감쇠 계수: </strong>0.995</p>
+            <p class="info-item2">작성 후 7일 동안은 감쇠를 적용하지 않고, 조회 시 점수만 증가합니다.</p>
+            <p class="info-item2">트렌드 점수는 최소 0 이상으로 유지되도록 설정하여 버그를 방지했습니다.</p>
+            <br>
+
+            <p class="info-item"><strong>작성 7일 이내: </strong>트렌드 점수는 감소하지 않으며, 조회 시마다 1씩 증가합니다.</p>
+            <p class="info-item"><strong>작성 후 10일째: </strong>7일동안은 감쇠를 적용하지 않기에, 그 이후로 3일이 감쇠 계수에 적용되어 일별 0.5% 씩 감소합니다.
+            </p>
+            <p class="info-item2">7일 이후의 3일 동안의 감소율은 `100 * 0.995^3 ≈ 98.5` 가 됩니다.</p>
+            <p class="info-item2">만약 에세이의 트렌드 점수가 100이였다고 가정했을 때, 새로운 트렌드 점수는 `98.5` + `1`(조회증가량) = `99.5` -> `99`(소수점
+              버림) 이 됩니다.</p>
+            <br>
+            <h4>트렌드 점수 관리를 크론작업이 아닌 조회 트리거로 결정한 이유</h4>
+            <p class="info-item">트렌드 점수 관리는 사용자가 에세이를 조회할 때마다 트리거됩니다. 크론 작업을 통한 주기적 업데이트와 비교했을 때 다음과 같은 이점이 있었습니다.</p>
+            <p class="info-item2">
+              <strong>효율적인 리소스 사용: </strong>크론 작업은 정해진 시간 간격마다 모든 에세이의 트렌드 점수를 업데이트해야 하므로 서버 리소르를 많이 소모해야 했습니다. 반대로
+              조회 트리거 방식은 사용자가 실제로 에세이를 조회할 때만 점수를 업데이트하므로 리소스를 보다 효율적으로 사용합니다.
+            </p>
+            <p class="info-item2">
+              <strong>실시간 반영: </strong>사용자의 활동에 따라 실시간으로 트렌드 점수가 반영되어 더 정확한 인기도 평가가 가능합니다. 이는 사용자 경험을 향상시키고 최신 정보를
+              제공하는데 유리합니다.
+            </p>
+          </div>
         </div>
+        <br>
+
+
       </section>
       <br>
       <section id="search">
@@ -677,113 +664,100 @@
         <div class="trgmgin">
           <img src="trgmgin.png" alt="trgmgin.png" onclick="window.open(this.src)">
         </div>
-        <p>에세이 검색 기능은 사용자가 입력한 키워드를 기반으로 유사도 높은 에세이를 효율적으로 검색할 수 있도록 설계했습니다. 이를 위해 PostgreSQL의 trgm(Trigram)과
-          GIN(Generalized Inverted Index)인덱스를 활용해서 대용량 데이터에서도 빠르고 정확한 검색 결과를 제공할 수 있습니다.</p>
+        <h5>에세이 검색 기능은 사용자가 입력한 키워드를 기반으로 유사도 높은 에세이를 효율적으로 검색할 수 있도록 설계했습니다. 이를 위해 PostgreSQL의 trgm(Trigram)과
+          GIN(Generalized Inverted Index)인덱스를 활용해서 대용량 데이터에서도 빠르고 정확한 검색 결과를 제공할 수 있습니다.</h5>
         <br>
-        <p>
-          <strong>
-            trgm과 GIN 인덱스, 그리고 Full Text Search
-          </strong>
-        </p>
-        <ul>
-          <li>
+        <h4>trgm과 GIN 인덱스, 그리고 Full Text Search</h4>
+        <div class="info-list">
+          <p class="info-item">
             <strong>trgm(Trigram): </strong>문자열에서 3개의 연속된 문자(트라이그램)을 이용하여 문자열 간의 유사도를 측정합니다. 예를 들어 '안녕하세요' 라는 문자열은
             ['안녕', '녕하', '하세', '세요']와 같은 트라이그램을 가지게 되고 이를 통해 문자열 유사도를 빠르게 계산할 수 있습니다. 예를 들어, '고양이'와 '고양이들'은 '고양이'라는
             트라이그램을 공유하므로 유사도가 높게 평가됩니다.
-          </li>
-          <br>
-          <li>
+          </p>
+          <p class="info-item">
+            <strong>trgm(Trigram): </strong>문자열에서 3개의 연속된 문자(트라이그램)을 이용하여 문자열 간의 유사도를 측정합니다. 예를 들어 '안녕하세요' 라는 문자열은
+            ['안녕', '녕하', '하세', '세요']와 같은 트라이그램을 가지게 되고 이를 통해 문자열 유사도를 빠르게 계산할 수 있습니다. 예를 들어, '고양이'와 '고양이들'은 '고양이'라는
+            트라이그램을 공유하므로 유사도가 높게 평가됩니다.
+          </p>
+          <p class="info-item">
             <strong>GIN(Generalized Inverted Index): </strong> PostgreSQL의 인덱스 타입 중 하나로 매우 효율적인 검색 성능을 제공합니다. 특히 trgm과
             함께 사용하면 높은 성능을 발휘합니다. 예를 들어 '고양이'라는 키워드를 검색하면, gin 인덱스는 트라이그램 '고양'을 포함하는 모든 문자열을 빠르게 찾아낼 수 있습니다.
-          </li>
-          <br>
-          <li>
+          </p>
+          <p class="info-item">
             <strong>uaaccent 확장: </strong>PostgreSQL의 확장 중 하나로 텍스트에서 악센트나 다이아크리틱 문자를 제거해서 표준화된 형태로 변환해줍니다. 한글에는 악센트가 없지만
             영어 등 다국어 텍스트를 포함할 수 있는 경우 유용하게 사용할 수 있습니다.
-          </li>
-          <br>
-          <li>
-            <strong>
-              전체 텍스트 검색(Full Text Search):
-            </strong>
+          </p>
+          <p class="info-item"><strong>
+            전체 텍스트 검색(Full Text Search):
+          </strong>
             PostgreSQL의 tsvector 타입을 사용해 텍스트를 토큰화하고 인덱싱합니다. 텍스트의 각 단어를 분리하고, 각 단어의 위치와 중요도를 저장합니다. 예를 들어 "안녕하세요. 저는
-            개발자입니다."는 다음과 같은 tsvector로 변환됩니다.
-            <br>
-            <code>'안녕하세요':1A '저는':2B '개발자':3C '입니다':4D</code>
-            <br>
-            전체 텍스트 검색에서는 tsquery를 사용해 검색어를 토큰화하고 미리 생성해둔 vector 필드와 비교해 일치하는 결과를 찾습니다.
-          </li>
-        </ul>
+            개발자입니다."는 다음과 같은 tsvector로 변환됩니다.<br><code>'안녕하세요':1A '저는':2B '개발자':3C '입니다':4D</code><br>전체 텍스트 검색에서는
+            tsquery를 사용해
+            검색어를 토큰화하고 미리 생성해둔 vector 필드와 비교해 일치하는 결과를 찾습니다.</p>
+        </div>
+
         <br>
-        <strong>키워드 분석 및 쿼리 빌드</strong>
-        <ul>
-          <li>
+        <h4>키워드 분석 및 쿼리 빌드</h4>
+        <div class="info-list">
+          <p class="info-item">
             <strong>키워드 길이가 3자 미만인 경우: </strong>키워드가 짧은 경우 트라이그램이 충분히 생성되지 않아 유사도 분석이 부정확할 수 있기 때문에 tsvector 타입으로 생성해둔
             필드를 사용해 검색 정확도를 높입니다. 예를 들어 '안녕'이라는 키워드는 '안녕'이라는 단일 트라이그램만 생성하므로 유사도 분석이 부정확할 수 있습니다. 따라서 전체 텍스트 검색을 사용하면 더
             정확한 결과를 얻을 수 있습니다.
-          </li>
-          <br>
-          <li>
+          </p>
+          <p class="info-item">
             <strong>키워드 길이가 3자 이상인 경우: </strong>3자 이상의 키워드는 충분한 트라이그램이 생성되어, trgm을 사용해 유사도 검색을 수행하면 보다 정밀한 유사도 분석이
             가능합니다. 이때 GIN 인덱스를 사용해서 일치하는 트라이그램 텍스트를 빠르게 찾을 수 있습니다.
-          </li>
-        </ul>
+          </p>
+        </div>
+
         <br>
       </section>
     </section>
     <br/>
     <section id="performance">
-      <h2>성능 최적화 및 확장성</h2>
+      <h2>▣ 성능 최적화 및 확장성</h2>
       <section id="caching-strategy">
         <h3>캐싱 전략</h3>
         <div class="cache">
           <img src="cache.png" alt="캐싱" onclick="window.open(this.src)">
         </div>
-        <p>데이터 일관성의 중요도에 따라 적절한 캐싱 전략을 사용해 성능을 최적화하고 일관성을 유지했습니다.</p>
+        <h4>사용자 데이터 캐싱</h4>
+        <div class="info-list">
+          <p class="info-item"><strong>Write-Through 전략:</strong> 유저데이터는 애플리케이션 전역에서 빈번하게 사용하고, 사용자 인가에서 사용하는 정보이기 때문에
+            데이터 일관성을 유지하는 것이 필수적이였습니다. 예시로 현재 적용한 인가 시스템은 매 요청마다 요청자를 인증하고 JWT를 갱신하는 방식이기 때문에 사용자 정보가 업데이트 된 경우 페이로드도 같이
+            변경될 수 있기 때문에 일관성을 유지하기 위해 Write-Through 전략을 사용해서 데이터베이스에 쓰기 작업을 수행할 때 캐시도 동시에 업데이트하여 일관성을 유지했습니다.</p>
+        </div>
+        <h4>에세이 검색 결과 캐싱</h4>
+        <div class="info-list">
+          <p class="info-item"><strong>Cache-aside 전략: </strong>에세이 검색 결과는 자주 갱신되지 않으며, 데이터의 일관성이 다소 떨어져도 큰 문제가 되지 않기
+            때문에 Cache-aside
+            전략을 사용하여 캐시에 데이터가 없을 때만 데이터베이스에서 데이터를 조회하고 캐시에 저장합니다. 이와 함께 TTL을 설정하여 일정 시간이 지나면 캐시된 데이터가 자동으로 무효화되므로 이용자의
+            더티리드를 최소화 시킬 수 있습니다.
+          </p>
+        </div>
         <br>
-        <ul>
-          <li>
-            <strong>사용자 데이터 캐싱</strong>
-            <p><strong>Write-Through 전략:</strong> 유저데이터는 애플리케이션 전역에서 빈번하게 사용하고, 사용자 인가에서 사용하는 정보이기 때문에 데이터 일관성을 유지하는 것이
-              필수적이였습니다.<br>예시로 현재 적용한 인가 시스템은 매 요청마다 요청자를 인증하고 JWT를 갱신하는 방식이기 때문에 사용자 정보가 업데이트 된 경우 페이로드도 같이 변경될 수 있기
-              때문에 일관성을 유지해야하기 때문에 Write-Through 전략을 사용해서 데이터베이스에 쓰기 작업을 수행할 때 캐시도 동시에 업데이트하여 일관성을 유지했습니다.</p>
-          </li>
-          <br>
-          <li>
-            <strong>에세이 검색 결과 캐싱</strong>
-            <p><strong>Cache-aside 전략: </strong>에세이 검색 결과는 자주 갱신되지 않으며, 데이터의 일관성이 다소 떨어져도 큰 문제가 되지 않기 때문에 Cache-aside
-              전략을 사용하여 캐시에 데이터가 없을 때만 데이터베이스에서 데이터를 조회하고 캐시에 저장합니다. 이와 함께 TTL을 설정하여 일정 시간이 지나면 캐시된 데이터가 자동으로 무효화되므로 최소한의
-              일관성을 보장할 수 있습니다.
-            </p>
-          </li>
-        </ul>
       </section>
       <section id="queue-system">
         <h3>큐 시스템을 이용한 작업 분산</h3>
-        <p><strong>큐 기반 작업의 필요성</strong></p>
-        <p>서비스 요구사항 중 많은 데이터를 한꺼번에 처리하는 작업은 많은 리소스가 많이 소모되며 시스템 성능에 영향을 줄 수 있었습니다. 특히 대규모 데이터베이스 업데이트 작업은 다음과 같은 문제를 야기할
-          수 있습니다.</p>
-        <ul>
-          <li>
-            성능 저하: 대량의 데이터를 한꺼번에 처리하면 데이터베이스의 성능이 저하될 수 있습니다.
-          </li>
-          <li>
-            타임아웃: 대규모 업데이트 작업이 시간 내에 완료되지 않아 타임아웃이 발생할 수 있습니다.
-          </li>
-          <li>
-            일관성 이슈: 작업이 중간에 실패할 경우 데이터의 일관성이 깨질 수 있습니다.
-          </li>
-        </ul>
-        이러한 문제를 해결하기 위해 작업을 배치로 나누어 큐를 통해 점진적으로 처리하는 방법을 선택하게 되었고, 큐 기반 작업을 통해 즉각적인 응답이 불필요하고 많은 리소스를 사용하는 작업을 효율적으로 배치로
-        나누어 처리하고, 작업 실패 시 재시도 및 백오프 전략을 통해 안정성을 유지하며, 손쉽게 수평적
-        확장과 동적 작업 추가 및 우선순위 설정을 통해 다양한 요구사항을 유연하게 대응할 수 있었습니다
+        <h4>큐 기반 작업의 필요성</h4>
+        <h5>서비스 요구사항 중 많은 데이터를 한꺼번에 처리하는 작업은 리소스를 많이 소모하며 시스템 성능에 영향을 줄 수 있었습니다. 특히 대규모 데이터베이스 업데이트 작업은 다음과 같은 문제를 야기할
+          수 있습니다.</h5>
+        <div class="info-list">
+          <p class="info-item"><strong>성능 저하: </strong>대량의 데이터를 한꺼번에 처리하면 데이터베이스의 성능이 저하될 수 있습니다.</p>
+          <p class="info-item"><strong>타임아웃: </strong>대규모 업데이트 작업이 시간 내에 완료되지 않아 타임아웃이 발생할 수 있습니다.</p>
+          <p class="info-item"><strong>일관성 이슈: </strong>작업이 중간에 실패할 경우 데이터의 일관성이 깨질 수 있습니다.</p>
+        </div>
+        <p>이러한 문제를 해결하기 위해 작업을 배치로 나누어 큐를 통해 점진적으로 처리하는 방법을 선택하게 되었고, 큐 기반 작업을 통해 즉각적인 응답이 불필요하고 많은 리소스를 사용하는 작업을 효율적으로
+          배치로
+          나누어 처리하고, 작업 실패 시 재시도 및 백오프 전략을 통해 안정성을 유지하며, 손쉽게 수평적
+          확장과 동적 작업 추가 및 우선순위 설정을 통해 다양한 요구사항을 유연하게 대응할 수 있었습니다.</p>
+
         <br>
-        <br>
+        <h4>
+          예시: 회원 탈퇴 처리
+        </h4>
         <p>
-          <strong>예시: 회원 탈퇴 처리</strong>
-        </p>
-        <p>
-          저희 서비스는 회원 탈퇴 요청 시 30일간의 유예기간을 두고 있습니다. 이 기간 동안 탈퇴를 철회하지 않으면 크론작업을 통해 30일이 지난 유저들을 논리삭제하고, 해당 유저들이 작성한 에세이를
+          회원 탈퇴 요청 시 30일간의 유예기간을 두고 있고, 이 기간 동안 탈퇴를 철회하지 않으면 크론작업을 통해 30일이 지난 유저들을 논리삭제하며 해당 유저들이 작성한 에세이를
           비공개 처리해야 했습니다. 이를 효과적으로 처리하기 위해 Bull 라이브러리를 사용하여 큐 기반 작업을 구현했습니다. Bull 라이브러리는 기본적으로 FIFO 방식으로 동작하여 작업이 추가된
           순서대로 처리되므로 작업의 순서와 일관성을 유지할 수 있습니다.
         </p>
@@ -792,182 +766,307 @@
           <img src="bull.png" alt="bull" onclick="window.open(this.src)">
         </div>
         <br>
-        <p><strong>구현</strong></p>
-        <ul>
-          <li>
+        <div class="info-list">
+          <p class="info-item">
             <strong>크론 작업: </strong>트래픽이 가장 적을 것으로 예상되는 매일 오전 4시에 크론 작업이 실행됩니다. 탈퇴 요청 후 30일이 지난 유저를 논리적으로 삭제하고, 해당
-            유저들이 작성한 에세이 상태를 비공개로 전환하기 위해 각 유저를 하나의 배치로 재시도 횟수와 지연시간을 설정해 큐에 추가합니다. 추가적으로 bull 큐는 등록된 작업들은 여러 워커 노드에서
-            병렬로 처리하기
-            때문에 시스템 부하를 줄이기 위한 목적에 맞게 워커 노드를 하나로 제한해 각 작업이 순차적으로 실행되도록 설정했습니다.
-          </li>
-          <br>
-          <li>
+            유저들이 작성한 에세이 상태를 비공개로 전환하기 위해 각 유저를 하나의 배치로 재시도 횟수와 지연시간을 설정해 큐에 추가합니다. 추가적으로 bull 큐는 등록된 작업들을 여러 워커 노드에서
+            병렬로 처리하기 때문에 시스템 부하를 줄이기 위한 목적에 맞게 워커 노드를 하나로 제한해 각 작업이 순차적으로 실행되도록 설정했습니다.
+          </p>
+          <p class="info-item">
             <strong>큐 작업: </strong>각 배치 작업은 큐에 의해 프로세서로 전달되어 처리합니다. 이 때 프로세서는 원자성을 지키기 위해 데이터베이스에서 트랜잭션을 시작하고, 배치가 성공적으로
-            처리되면 트랜잭션을 커밋하고 작업을 완료합니다.
-            <br>
-            배치 처리 중 오류가 발생하면 트랜잭션을 롤백하고 재시도 횟수가 남아있는 경우 설정된 지연시간 후 재시도 하게 됩니다.
-          </li>
-        </ul>
+            처리되면 트랜잭션을 커밋하고 작업을 완료합니다. 배치 처리 중 오류가 발생하면 트랜잭션을 롤백하고 재시도 횟수가 남아있는 경우 설정된 지연시간 후 재시도 하게 됩니다.
+          </p>
+        </div>
+
         <br>
       </section>
     </section>
     <br/>
+
+    <section id="system">
+      <h2>▣ 운영 및 시스템 관리</h2>
+      <section id="rbac"></section>
+      <div class="rbac">
+        <h3>역할 기반 접근 제어 (RBAC)</h3>
+        <img src="rbac.png" alt="rbac" onclick="window.open(this.src)">
+        <h5>각 역할(일반 유저, 관리자, 루트 관리자)에 대해 별도의 테이블과 전략 패턴을 사용하여 인증과 인가를 처리합니다. 이 때, 루트 관리자의 경우 관리자 식별자를 추가로 검증하여 권한을
+          확인합니다.
+        </h5>
+        <div class="info-list">
+          <p class="info-item"><strong>일반유저: </strong>일반 유저는 기본적인 서비스에만 접근할 수 있도록 제한됩니다. 개발자가 의도한 기능만 사용할 수 있으며 민감한
+            정보에는 접근할 수 없습니다.
+          </p>
+          <p class="info-item"><strong>관리자: </strong>관리자는 공지 작성, 신고 및 리뷰 처리 등 일반유저가 접근할 수 없는 다양한 데이터를 조회하고 판단해 원할한 서비스
+            운영을 위한 역할입니다.
+          </p>
+          <p class="info-item"><strong>루트 관리자: </strong>루트 관리자는 관리자 기능을 기반으로 하되, 루트 관리자만 접근할 수 있는 민감한 기능을 추가적으로 수행하는
+            역할입니다. 관리자의 활동 로그
+            조회, 직접적인 데이터베이스 객체 조작 등 서비스의 투명성과 관리자 역할로 수행하기 위험한 기능을 사용할 수 있습니다.
+          </p>
+        </div>
+      </div>
+
+      <br>
+
+      <section id="server_status">
+        <div>
+          <h3>서버 상태 관리</h3>
+          <h5>서버 상태 관리 기능은 운영 중 발생할 수 있는 다양한 변수에 신속하게 대응하기 위해 도입했습니다. 서버는 다음과 같은 상태를 가질 수 있도록 설계했습니다.</h5>
+          <div class="info-list">
+            <p class="info-item"><strong>활성: </strong>서버가 정상적으로 운영되며, 모든 요청을 처리할 수 있는 상태입니다. 이 상태에서는 사용자가 정상적으로 서비스를 이용할
+              수 있으며 각 요청에 맞는 상태코드와 데이터를 받게 됩니다.</p>
+            <p class="info-item"><strong>유지보수: </strong>서버가 시스템 유지보수 작업을 위해 일시적으로 접근을 제한하는 상태입니다. 이때는 관리자만 시스템에 접근할 수
+              있으며, 일반 사용자의 요청에는 423(Locked) 상태 코드가 반환됩니다.</p>
+            <p class="info-item"><strong>닫힘: </strong>서버가 일시적으로 닫혀 외부 요청을 처리하지 않는 상태입니다. 이 상태에서는 루트 관리자만 시스템에 접근할 수 있으며,
+              일반 사용자의 요청에는 503 (Service Unavailable) 상태 코드가 반환됩니다.</p>
+          </div>
+          <h5>현재 서버는 AWS 인프라를 기반으로 배포되어 운영되고 있고, 이 환경은 다양한 서비스와 인프라가 복잡하게 얽혀 있기 때문에 이를 수동으로 제한하거나 개방하는 작업은 매우 번거롭고 시간이
+            소요될 수 있습니다. 또한 긴급한 상황에서 서버 상태를 수동으로 조정하려다 실수를 범할 가능성이 있고 이로 인해 돌이킬 수 없는 문제가 발생할 수 있습니다. 그렇기에 서버 상태 관리 기능을
+            추가함으로써 관리자는 단순한 조작으로 서버의 상태를 변경할 수 있고 다음과 같은 이점을 가질 수 있습니다.</h5>
+          <div class="info-list">
+            <p class="info-item"><strong>1. 긴급 상황 대응</strong></p>
+            <p class="info-item2"><strong>치명적인 버그: </strong>운영 중 치명적인 버그가 발견되었을 때, 시스템의 무결성을 유지하기 위해 서버를 신속하게 유지보수 상태로
+              전환하여 일반 사용자 접근을 차단할 수 있습니다. 이를 통해 문제를 진단하고 수정할 시간을 확보할 수 있고 사용자 데이터나 시스템 안정성에 미치는 영향을 최소화할 수 있습니다.</p>
+            <p class="info-item2"><strong>악의적인 공격: </strong>서버가 AWS Shield에서 방어하지 못한 악의적인 DDoS 공격이나 기타 보안 위협을 받고 있을 때,
+              서버를 닫힘 상태로 전환하여 루트 관리자만 접근할 수 있도록 함으로써, 서버를 보호하고 추가적인 피해를 방지할 수 있습니다.</p>
+
+            <p class="info-item"><strong>2. 계획된 유지보수</strong></p>
+            <p class="info-item2"><strong>시스템 업그레이드: </strong>서버나 데이터베이스의 업그레이드, 패치 적용 등이 필요한 경우 사전에 서버를 유지보수 상태로 전환하여
+              사용자에게 영향을 주지 않고 안전하게 작업을 진행할 수 있습니다. 이 과정에서 사용자에게 "유지보수 중" 메시지를 반환하며 관리자만 시스템에 접근할 수 있게 되어 운영의 안정성을 보장합니다.
+            </p>
+            <p class="info-item2"><strong>데이터 마이그레이션: </strong>중요한 데이터 마이그레이션 작업이 있을 때 서버를 유지보수 상태로 전환하여 데이터의 무결성을
+              보호하고 사용자의 접근으로 인한 데이터 손실이나 오류를 예방할 수 있습니다.</p>
+
+            <p class="info-item"><strong>3. 비상 복구</strong></p>
+            <p class="info-item2"><strong>재해 복구: </strong>예상치 못한 장애나 데이터 센터의 문제로 인해 비상 복구가 필요할 때 서버를 닫힘 상태로 설정하여 시스템
+              복구 작업이 완료될 때까지 외부 요청을 차단할 수 있습니다. 이 상태에서 루트 관리자는 복구 작업을 수행할 수 있으며 서비스의 정상화를 목표로 작업을 진행할 수 있습니다.</p>
+
+            <p class="info-item"><strong>4. 관리와 모니터링 용이성</strong></p>
+            <p class="info-item2"><strong>서버 상태 가시성: </strong>관리자가 현재 서버의 상태를 명확하게 파악하고 필요에 따라 신속하게 상태를 변경할 수 있도록 함으로써
+              전체 시스템의 가용성과 보안을 유지할 수 있습니다. 이 기능은 서버 운영에 있어 예기치 않은 상황에 대비하는 유연성을 제공합니다.</p>
+          </div>
+        </div>
+      </section>
+      <br>
+      <section id="report">
+        <h3>신고 및 제재 관리</h3>
+        <h4>신고 처리</h4>
+        <h5>서비스 이용자들은 다른 사용자가 생성한 콘텐츠에 대해 신고할 수 있고, 관리자는 이를 검토하고 운영 정책에 위반된 경우 제재를 가할 수 있도록 설계했습니다. 이 기능은 서비스 내에서 발생할 수
+          있는 문제를 효과적으로 관리하고, 커뮤니티의 건전성을 유지하는데 중요한 역할을 합니다.</h5>
+        <div class="info-list">
+          <p class="info-item"><strong>신고 처리: </strong>사용자가 특정 콘텐츠를 신고하면 관리자는 해당 신고를 검토하고, 운영 정책에 위반된 경우 작성자에게 제재를 가할 수
+            있습니다.</p>
+          <p class="info-item"><strong>모니터링 유저 관리: </strong>일정량 이상의 신고가 운영정책에 위반되었음이 확인되면, 서버는 자동으로 해당 유저를 모니터링 유저로
+            지정합니다. 이후 작성되는 에세이는 관리자의 사전 검토를 받아야 퍼블릭(발행)될 수 있습니다. 이를 통해 잠재적인 문제를 사전에 방지하고 서비스 품질을 유지합니다.</p>
+          <p class="info-item"><strong>밴 유저 관리: </strong>지속적인 불건전 콘텐츠를 생성하거나, 악의적으로 심각한 오류를 발생시킨 경우 관리자는 해당 유저를 밴 유저로
+            지정할 수 있습니다. 밴 유저로 지정된 사용자는 서비스에 접속을 시도할 때 403 코드를 반환하여 접근이 차단됩니다.</p>
+        </div>
+        <h4>신고 처리 방식</h4>
+        <img src="report.png" alt="">
+        <br>
+        <br>
+        <p>기본적으로 콘텐츠와 신고는 1:M 관계가 형성됩니다. 그렇기 때문에 동일한 콘텐츠에 대한 신고를 개별로 처리할 경우 각 신고의 처리 결과가 불일치하거나, 여러 관리자가 신고를 처리하는 경우
+          혼란을
+          야기할 수 있습니다. 이를 해결하기 위해 각 신고를 개별로 처리하는 대신 동일한 콘텐츠에 대한 모든 신고를 그룹으로 조회하고, 타겟 콘텐츠에 대해 일괄적으로 판단할 수
+          있도록 설계했습니다.</p>
+      </section>
+    </section>
+
+    <br>
+    <br>
     <section id="security">
-      <h2>보안</h2>
+      <h2>▣ 보안</h2>
       <section id="data-protection">
         <h3>데이터 보호</h3>
         <div class="bcrypt">
           <img src="bcrypt.png" alt="bcrypt" onclick="window.open(this.src)">
           <br>
-          <p>
-            <h4>개인정보 암호화</h4>
-          </p>
-          <ul>
-            <li>
-              bcrypt는 레인보우 테이블 공격을 방지하기 위해 솔팅과 키 스트레칭을 적용한 단방향 해싱으로 복호화가 불가능한 알고리즘입니다.
-            </li>
-            <br>
-            <li>
-              해시 결과는 식별자, 솔트, 해싱된 평문이 결합된 구성되고, 예를 들어 다음과 같습니다.
-              <br>
-              `$2b$12$e9tX7h7T0F1E9pZ1Ul5hOuRXFjOQzC3KrG1zYjY1YV5z5kH.ykXiK`
-              <ul>
-                <li>
-                  `$2b$`: 알고리즘 식별자
-                </li>
-                <li>
-                  `12$`: 비용 팩터(Key Stretching)
-                </li>
-                <li>
-                  `e9tX7h7T0F1E9pZ1Ul5hOu`: 솔트
-                </li>
-                <li>
-                  `RXFjOQzC3KrG1zYjY1YV5z5kH.ykXiK`: 해싱된 평문
-                </li>
-              </ul>
-            </li>
-            <br>
-            <li>
-              검증할 때는 입력된 평문과 저장된 해시의 솔트를 추출하여 입력된 평문을 동일한 방식으로 해싱하고, 생성된 해시와 저장된 해시를 비교하여 일치 여부를 확인합니다.
-              해싱 함수는 단방향 변환이기 때문에 해시 값에서 원본 데이터를 추출할 수 없습니다.
-              <br>
-              <br>
-              무작위 대입 공격의 경우 비용 팩터가 증가할수록 연산 시간이 기하급수적으로 늘어나 사실상 불가능에
+          <h4>개인정보 암호화</h4>
+          <h5>기본적으로 민감한 데이터는 <code>bcrypt</code>를 사용하여 암호화 후 저장됩니다.<br><code>bcrypt</code>는 레인보우 테이블 공격을 방지하기 위해 솔팅과 키
+            스트레칭을 적용한 단방향
+            해싱으로 복호화가
+            불가능한 알고리즘입니다.</h5>
+          <div class="info-list">
+            <h5>해시 결과는 식별자, 솔트, 해싱된 평문이 결합된 구성되고, 예를 들어 다음과 같습니다.</h5>
+            <p class="info-item">`$2b$12$e9tX7h7T0F1E9pZ1Ul5hOuRXFjOQzC3KrG1zYjY1YV5z5kH.ykXiK`</p>
+            <p class="info-item2"><strong>`$2b$`: </strong>알고리즘 식별자</p>
+            <p class="info-item2"><strong>`12$`: </strong>비용 팩터(Key Stretching)</p>
+            <p class="info-item2"><strong>`e9tX7h7T0F1E9pZ1Ul5hOu`: </strong>솔트</p>
+            <p class="info-item2"><strong>`RXFjOQzC3KrG1zYjY1YV5z5kH.ykXiK`: </strong>해싱된 평문</p>
+          </div>
+          <h5>검증할 때는 입력된 평문과 저장된 해시의 솔트를 추출하여 입력된 평문을 동일한 방식으로 해싱하고, 생성된 해시와 저장된 해시를 비교하여 일치 여부를 확인합니다.
+            해싱 함수는 단방향 변환이기 때문에 해시 값에서 원본 데이터를 추출할 수 없습니다.</h5>
+          <div class="info-list">
+            <p class="info-item">무작위 대입 공격의 경우 비용 팩터가 증가할수록 연산 시간이 기하급수적으로 늘어나 사실상 불가능에
               가깝습니다.
-            </li>
-            <ul>
-              <li>
-                비용 팩터가 12이고 8자리 소문자를 해싱한다고 할 때 가능한 조합은 약 2천억개가 넘습니다.
-              </li>
-              <li>
-                무작위 대입 공격으로 하나의 조합에 약 100밀리초가 걸린다고 가정하면, 이론적으로 662년이라는 시간이 걸리기 때문에 높은 보안성을 제공합니다.
-              </li>
-            </ul>
-            <br>
-          </ul>
+            </p>
+            <p class="info-item2"> 비용 팩터가 12이고 8자리 소문자를 해싱한다고 할 때 가능한 조합은 약 2천억개가 넘습니다.</p>
+            <p class="info-item2">무작위 대입 공격으로 하나의 조합에 약 100밀리초가 걸린다고 가정하면, 이론적으로 662년이라는 시간이 걸리기 때문에 높은 보안성을 제공합니다.</p>
+          </div>
         </div>
-        <div class="rbac">
-          <h4>접근 제어 및 권한 관리</h4>
-        </div>
+        <br>
       </section>
       <section id="input-validation">
         <h3>입력 검증</h3>
-        <p>입력 검증 내용</p>
+        <h4>DTO를 통한 검증 및 직렬화</h4>
+        <img src="dto.png" alt="">
+        <div class="info-list">
+          <p class="info-item"><strong>요청 본문 검증: </strong>요청 데이터가 서비스 로직에 도달하기 전에 DTO를 사용해 필드의 타입, 필수 여부, 패턴 등을 검증하여 예상치
+            못한 입력이 서버에 영향을 주지 않도록 했습니다. 예를 들어, 비밀번호는 필수 조합 또는 길이를 가지도록 하고 이메일 주소는 유효한 형식인지 확인합니다.</p>
+          <p class="info-item"><strong>응답 데이터 직렬화: </strong>데이터베이스에서 조회된 데이터를 직렬화해 필요한 필드만 응답에 포함시키고 민감한 정보나 내부 구현 세부사항이
+            노출되지 않도록 직렬화해 보안을 강화하고 응답구조를 일관되게 유지해 클라이언트로 반환합니다.</p>
+        </div>
+        <h4>TypeORM을 통한 SQL 인젝션 방지</h4>
+        <div class="info-list">
+<pre><code class="typescript">async findUserByEmail(email: string) {
+    // Repository를 사용하여 'user' 테이블에서 특정 이메일을 가진 사용자를 찾는 쿼리 빌더를 생성
+    return this.userRepository
+      .createQueryBuilder('user') // 'user' 테이블에 대한 별칭을 설정
+      .where('user.email = :email', { email }) // WHERE 절에서 명명된 매개변수 ':email'을 사용하여 쿼리 조건을 설정
+
+      /*
+       ':email'은 SQL 쿼리 문자열 내에서 사용되는 매개변수 자리표시자입니다.
+       TypeORM은 이 자리표시자에 'email' 변수의 값을 안전하게 바인딩합니다.
+       여기서 중요한 점은, 사용자가 입력한 'email' 값이 직접 쿼리 문자열에 삽입되지 않는다는 것입니다.
+       대신, 'email' 값은 나중에 TypeORM에 의해 쿼리 실행 시점에 안전하게 바인딩되며,
+       이로 인해 SQL 인젝션 공격이 방지됩니다.
+       예를 들어, 사용자가 "john@example.com; DROP TABLE users;" 같은 악의적인 값을 입력하더라도
+       이 값은 단순한 문자열로 처리되어 쿼리의 의도치 않은 실행을 막을 수 있습니다.
+      */
+
+      .getOne(); // 쿼리를 실행하고 결과를 반환
+  }</code></pre>
+
+          <p class="info-item"><strong>파라미터 바인딩: </strong> 사용자가 입력한 값을 쿼리의 특정 위치에 삽입하기 전에 별도의 파라미터로 처리하여 쿼리문에 직접 삽입되지
+            않도록 합니다. 이로 인해 공격자가 SQL 명령어가 포함된 코드를 삽입하더라도 그 값이 단순한 데이터로 처리되어 쿼리문 자체의 구조가 깨지지 않아 SQL 인젝션이 발생하지 않습니다.</p>
+        </div>
       </section>
-      <section id="session-management">
-        <h3>로그인 및 세션 관리</h3>
-        <p>로그인 및 세션 관리 내용</p>
-      </section>
+      <!--      <section id="session-management">-->
+      <!--        <h3>로그인 및 세션 관리</h3>-->
+      <!--        <p>로그인 및 세션 관리 내용</p>-->
+      <!--      </section>-->
     </section>
     <br/>
     <section id="devops">
-      <h2>DevOps 및 배포</h2>
+      <h2>▣ DevOps 및 배포</h2>
       <section id="cicd">
         <h3>CI/CD 파이프라인</h3>
-        <br/>
-        <p class="cicd-description">해당 CI/CD 파이프라인은 프로젝트 기간 동안 불필요한 시간 소모를 줄이기 위해 가장 먼저 구축되었습니다. 비록 혼자서 서버를 개발했지만, PR과
-          코드 리뷰 과정 자체가 익숙하지 않아서 추후 협업에 있어 빠르게 적응할 수 있도록 하기 위함도 있었습니다. 이 과정을 통해 잘못된 푸쉬를 미연에
-          방지하고, 코드 리뷰 및 협업 프로세스에 익숙해질 수 있도록 하였습니다. 과정은 다음과 같습니다.</p>
-        <div class="cicd-container">
+
+        <h5>프로젝트가 시작되고 가장 먼저 CI/CD 파이프라인을 구축했습니다. 이를 통해 코드 변경 시 자동화된 빌드, 테스트, 배포 과정을 통해 환경 간의 일관성을 유지하고 빠른 오류 감지와 수정으로
+          생산성을 향상시킬 수 있습니다. 또한 점진적 배포와 모니터링을 통해 리스크를 줄이면서 신속하고 안정적으로 새로운 기능과 개선사항을 제공할 수 있었습니다. 현재 적용된 CI/CD 과정은 다음과
+          같습니다.</h5>
+        <div class="info-list">
           <img alt="CI/CD 파이프라인 다이어그램" src="cicd.png" onclick="window.open(this.src)">
-          <ul class="cicd-list">
-            <br>
-            <li>새로운 기능이나 버그 수정을 완료한 후 메인 브랜치에 PR을 생성합니다.</li>
-            <br>
-            <li>깃허브 액션에서 테스트 코드가 실행됩니다.</li>
-            <br>
-            <li>테스트 성공 및 리뷰가 끝나면 머지합니다.</li>
-            <br>
-            <li>깃허브 액션에서 메인 브랜치의 변경을 감지하고 도커 이미지를 생성하여 ECR로 푸쉬합니다.</li>
-            <br>
-            <li>ECR에 새로운 이미지가 생성되면 AWS 파이프라인의 소스 단계에서 이를 감지합니다.</li>
-            <br>
-            <li>빌드 단계에선 소스 단계에서 가져온 이미지를 이전 ECS 테스크 정의 파일을 가져와 새로운 이미지로 테스크를 재정의 합니다.</li>
-            <br>
-            <li>배포 단계에선 설정한 ECS 서비스에 새로운 테스크정의를 전달합니다.</li>
-            <br>
-            <li>롤링 업데이트가 실행되고 배포가 완료됩니다.</li>
-          </ul>
+          <div class="info-list">
+            <p class="info-item">1. 새로운 기능이나 버그 수정을 완료한 후 메인 브랜치에 PR을 생성합니다.</p>
+            <p class="info-item">2. 깃허브 액션에서 테스트 코드가 실행됩니다.</p>
+            <p class="info-item">3. 테스트 성공 및 리뷰가 끝나면 머지합니다.</p>
+            <p class="info-item">4. 깃허브 액션에서 메인 브랜치의 변경을 감지하고 도커 이미지를 생성하여 ECR로 푸쉬합니다.</p>
+            <p class="info-item">5. ECR에 새로운 이미지가 생성되면 AWS 파이프라인의 소스 단계에서 이를 감지합니다.</p>
+            <p class="info-item">6. 빌드 단계에선 소스 단계에서 가져온 이미지를 이전 ECS 테스크 정의 파일을 가져와 새로운 이미지로 테스크를 재정의 합니다.</p>
+            <p class="info-item">7. 배포 단계에선 설정한 ECS 서비스에 새로운 테스크정의를 전달합니다.</p>
+            <p class="info-item">8 롤링 업데이트가 실행되고 배포가 완료됩니다.</p>
+          </div>
+
         </div>
         <br/>
-        <p>CI/CD 파이프라인 구축의 중요한 요소 중 하나는 무중단 배포를 구현하는 것 이였습니다. ECS를 사용중이였기에 선택지는 두 가지였습니다.</p>
+        <h4>무중단 배포</h4>
+        <h5>CI/CD 파이프라인 구축의 중요한 요소 중 하나는 무중단 배포를 구현하는 것 이였습니다. ECS를 사용중이였기에 선택지는 두 가지였습니다.</h5>
         <div class="rolling_bluegreen">
           <img alt="배포방법비교" src="rolling_bluegreen.png" onclick="window.open(this.src)">
         </div>
-        <p>두 방법 모두 무중단 배포를 지원하지만 배포 방식에는 뚜렷한 차이가 있어 고려해야 될 부분이 있었습니다.<br/></p>
-        <ul>
-          <li>
-            롤링업데이트: 새 버전을 점진적으로 배포하여 기존 버전을 새로운 버전으로 교체하는 방법.
-          </li>
-          <li>
-            블루/그린: 두 개의 동일한 환경을 사용하는 배포 방법.
-          </li>
-        </ul>
-        <p>롤링업데이트 순차적으로 인스턴스를 업테이트하기 때문에 리소스 측면에서 효율적이지만, 업데이트 중 상태 공유 문제나 데이터 일관성 문제가 발생할 수 있다는 단점이 있었습니다. <br/>반대로
-          블루/그린 배포는 별도의 두 개의 환경을 사용해 배포하면서 트래픽을 한번에 새 버전으로 전환하기 때문에 롤링업데이트의 단점을 보완할 수 있지만 리소스 사용이 증가함에 따라 인프라비용이 증가한다는
-          단점이 있었습니다.<br/><br/>최우선 목표로 비용절감 우선순위가 높았기에 롤링업데이트 방식을 선택하게 되었지만, 추후에 이용자가 증가하고 큰 변경점이 발생하는 업데이트가 있을 시
-          블루/그린으로의 전환을 고려해야할 것 같습니다.</p>
+        <h5>두 방법 모두 무중단 배포를 지원하지만 배포 방식에는 뚜렷한 차이가 있어 고려해야 될 부분이 있었습니다.<br/></h5>
+        <div class="info-list">
+          <p class="info-item"><strong>롤링업데이트: </strong>새 버전을 점진적으로 배포하여 기존 버전을 새로운 버전으로 교체하는 방법</p>
+          <p class="info-item2">롤링업데이트 순차적으로 인스턴스를 업테이트하기 때문에 리소스 측면에서 효율적이지만, 업데이트 중 상태 공유 문제나 데이터 일관성 문제가 발생할 수 있다는
+            단점이 있었습니다.</p>
+          <p class="info-item"><strong>블루/그린: </strong>두 개의 동일한 환경을 사용하는 배포 방법</p>
+          <p class="info-item2">블루/그린 배포는 별도의 두 개의 환경을 사용해 배포하면서 트래픽을 한번에 새 버전으로 전환하기 때문에 롤링업데이트의 단점을 보완할 수 있지만 리소스 사용이
+            증가함에 따라 인프라비용이 증가한다는
+            단점이 있었습니다.</p>
+        </div>
+        <h5>최우선 목표로 비용절감 우선순위가 높았기에 롤링업데이트 방식을 선택하게 되었지만, 추후에 이용자가 증가하고 큰 변경점이 발생하는 업데이트가 있을 시
+          블루/그린으로의 전환을 고려하고 있습니다.</h5>
+      </section>
+      <br>
+      <section id="ecs">
+        <h3>컨테이너 오케스트레이션</h3>
       </section>
       <section id="monitoring">
         <h3>모니터링 및 로깅</h3>
         <div class="log-container">
           <img alt="클라우드워치" src="cloudwatch.png" onclick="window.open(this.src)">
-          <p>AWS의 가장 큰 장점이라 생각하는 CloudWatch 서비스를 적극 활용해 애플리케이션과 인프라를 모니터링하고 분석했습니다. 특히 사용중인 ECS와 연계하여 오토스케일링 및 각종 서비스의
-            로그와 메트릭을 수집했습니다.<br/><br/>ECS는 현재 실행 중인 컨테이너의 지표가 설정한 기준을 일정 시간 이상 초과할 경우 추가적으로 컨테이너를 실행하여 트래픽 부하를 분산시키도록
-            설정했습니다. 이를 위해 브릿지 네트워크 모드를 사용해 컨테이너 포트를 동적으로 할당했고 이때 CloudWatch는 다음과 같은 중요한 역할을 했습니다.<br/></p>
-          <ul>
-            <li>
-              <strong>지표 수집 및 모니터링: </strong>ECS에서 실행 중인 각 컨테이너의 성능 지표를 실시간으로 수집해, 이를 통해 CPU 사용률, 메모리 사용률, 네트워크 트래픽 등의
-              주요 메트릭을 모니터링하고 특정 기준을 초과할 경우 알림을 받을 수 있도록 설정했습니다.
-            </li>
-            <li>
-              <strong>오토 스케일링: </strong> ECS 서비스는 CloudWatch 경보를 기반으로 오토 스케일링을 구성할 수 있었습니다. 예를 들어 CPU 사용률이 80%를 초과하는 경우
+          <h5>AWS의 가장 큰 장점이라 생각하는 CloudWatch 서비스를 적극 활용해 애플리케이션과 인프라를 모니터링하고 분석했습니다. 특히 사용중인 ECS와 연계하여 오토스케일링 및 각종 서비스의
+            로그와 메트릭을 수집했습니다.</h5>
+          <p>ECS는 현재 실행 중인 컨테이너의 지표가 설정한 기준을 일정 시간 이상 초과할 경우 추가적으로 컨테이너를 실행하여 트래픽 부하를 분산시키도록
+            설정했습니다. 이를 위해 브릿지 네트워크 모드를 사용해 컨테이너 포트를 동적으로 할당했고 이때 CloudWatch는 다음과 같은 중요한 역할을 했습니다.</p>
+          <div class="info-list">
+            <p class="info-item"><strong>지표 수집 및 모니터링: </strong>ECS에서 실행 중인 각 컨테이너의 성능 지표를 실시간으로 수집해, 이를 통해 CPU 사용률, 메모리
+              사용률, 네트워크 트래픽 등의
+              주요 메트릭을 모니터링하고 특정 기준을 초과할 경우 알림을 받을 수 있도록 설정했습니다.</p>
+            <p class="info-item"><strong>오토 스케일링: </strong>ECS 서비스는 CloudWatch 경보를 기반으로 오토 스케일링을 구성할 수 있었습니다. 예를 들어 CPU
+              사용률이 80%를 초과하는 경우
               추가 컨테이너를 자동으로 실행하여 부하를 분산시킬 수 있습니다. 이렇게 동적으로 컨테이너 수를 조정함으로써 트래픽 증가에 유연하게 대응할 수 있으며 결과적으로 필요할 때만 컨테이너를 추가
-              실행하거나 종료함으로써 효율적인 리소스 사용이 가능해지며 비용절감을 기대할 수 있습니다.
-            </li>
-            <li>
-              <strong>문제 감지 및 대응: </strong> 대시보드와 알람을 통해 시스템의 상태를 실시간으로 모니터링하고 문제가 발생할 경우 신속하게 대응해 시스템의 안정성과 가용성을 높이는데
-              중요한 역할을 합니다.
-            </li>
-          </ul>
-          <br/>
-          <p>ECS를 제외하고도 사용중인 서비스들의 로그 그룹과 스트림을 통해 손쉽게 관리하고, 검색 및 필터링 기능을 활용하여 필요한 정보를 빠르게 찾을 수 있었으며 성능 메트릭을 실시간으로 모니터링해
+              실행하거나 종료함으로써 효율적인 리소스 사용이 가능해지며 비용절감을 기대할 수 있습니다.</p>
+            <p class="info-item"><strong>문제 감지 및 대응: </strong>대시보드와 알람을 통해 시스템의 상태를 실시간으로 모니터링하고 문제가 발생할 경우 신속하게 대응해
+              시스템의 안정성과 가용성을 높이는데
+              중요한 역할을 합니다.</p>
+          </div>
+
+          <h5>ECS를 제외하고도 사용중인 서비스들의 로그 그룹과 스트림을 통해 손쉽게 관리하고, 검색 및 필터링 기능을 활용하여 필요한 정보를 빠르게 찾을 수 있었으며 성능 메트릭을 실시간으로 모니터링해
             CPU, 메모리, 디스크 I/O, 네트워크 트래픽 등의 상태를 파악해 필요한 자원을 추가하거나 조정해 성능 문제를 예방할 수 있습니다. 또한 중요한 메트릭에 대해 알람을 설정해 문제가 발생했을
-            때 즉시 대응할 수 있도록 설정하여 시스템의 안정성을 유지할 수 있도록 했습니다.</p>
+            때 즉시 대응할 수 있도록 설정하여 시스템의 안정성을 유지할 수 있도록 했습니다.</h5>
         </div>
       </section>
     </section>
     <br/>
     <section id="api-docs">
-      <h2>API 문서화</h2>
+      <h2>▣ API 문서화</h2>
       <section id="swagger">
         <h3>스웨거 사용</h3>
-        <p>스웨거 사용 내용</p>
+        <h4>스웨거 설정 및 보안</h4>
+        <pre><code class="typescript">
+  app.use(
+    ['/api-doc', '/swagger.json'],
+    basicAuth({
+      authorizeAsync: true,
+      authorizer: async (email, password, callback) => {
+        const isValid = await adminService.validateSwaager(email, password);
+        if (isValid) {
+          return callback(null, true);
+        } else {
+          return callback(null, false);
+        }
+      },
+      challenge: true,
+    }),
+  );
+  const document: OpenAPIObject = SwaggerModule.createDocument(app, swaggerConfig);
+  SwaggerModule.setup('/api-doc', app, document);
+  writeFileSync(join(process.cwd(), 'swagger.json'), JSON.stringify(document));
+</code></pre>
+        <div class="info-list">
+          <p class="info-item"><strong>API 문서는 Swagger를 통해 자동 생성되며, API 변경 사항을 손쉽게 반영하고 문서화 작업의 정확성을 보장합니다. 또한 문서화된 API는
+            개발자간의 커뮤니케이션을 원할하게 하고 API를 쉽게 이해하고 사용할 수 있도록 합니다.</strong></p>
+          <p class="info-item"><strong>추가적으로 문서 요청자가 관리자인지 검증하여, 인증에 성공한 관리자만이 API 문서에 접근할 수 있게 설계해서 API 문서의 무단 접근을 방지하고
+            민감한 정보가 보호되도록 했습니다.</strong></p>
+        </div>
+        <br>
+        <h4>API 명세 작성</h4>
+        <img src="swagger.png" alt="">
+        <div class="info-list">
+          <p class="info-item"><strong>그 동안 개발을 하면서 여러 사람들과 협업하는 과정에서 느꼈던 점은 문서가 충분히 준비되어 있어도 실제로 사람들이 잘 보지 않았습니다. <br>문서화된
+            내용을 이해하지 못한 채 질문이 이어지고, 이로 인해 반복적으로 같은 설명을 해야 하는 상황이 많았습니다.<br>그 과정은 피로도를 상승시켰고 문서를 더 명확하고 쉽게, 많은 정보를
+            담아내야겠다고 생각했습니다. <br><br>그래서 이번 프로젝트에서는 모두가 필수적으로 봐야하는 API 명세에 최대한 자세하게 설명을 추가해서 단순히 무엇을 응답하는지가 아닌, 간단하면서 명료한
+            동작과정을 추가해서 서비스로직의 이해를 돕고 개발자 간의 커뮤니케이션을 개선하고자 했습니다.</strong>
+          </p>
+          <p class="info-item"><strong></strong></p>
+        </div>
       </section>
     </section>
     <br/>
     <section id="code-examples">
-      <h2>코드 예시</h2>
+      <h2>▣ 코드 예시</h2>
       <section id="important-code">
         <h3>중요 로직 코드</h3>
         <p>중요 로직 코드 내용</p>
@@ -975,7 +1074,7 @@
     </section>
     <br/>
     <section id="results">
-      <h2>성과 및 개선점</h2>
+      <h2>▣ 성과 및 개선점</h2>
       <section id="project-results">
         <h3>프로젝트 성과</h3>
         <p>프로젝트 성과 내용</p>
@@ -1018,16 +1117,24 @@
       <li><a href="#queue-system">- 큐 시스템을 이용한 작업 분산</a></li>
     </ul>
     <br/>
+    <li><a class="main-category" href="#system">운영 및 시스템 관리</a></li>
+    <ul>
+      <li><a href="#rbac">- 역할 기반 접근 제어</a></li>
+      <li><a href="#server_status">- 서버 상태 관리</a></li>
+      <li><a href="#report">- 신고 및 제재 관리</a></li>
+    </ul>
+    <br>
     <li><a class="main-category" href="#security">보안</a></li>
     <ul>
       <li><a href="#data-protection">- 데이터 보호</a></li>
       <li><a href="#input-validation">- 입력 검증</a></li>
-      <li><a href="#session-management">- 로그인 및 세션 관리</a></li>
+      <!--      <li><a href="#session-management">- 로그인 및 세션 관리</a></li>-->
     </ul>
     <br/>
     <li><a class="main-category" href="#devops">DevOps 및 배포</a></li>
     <ul>
       <li><a href="#cicd">- CI/CD 파이프라인</a></li>
+      <li><a href="#ecs">- 컨테이너 오케스트레이션</a></li>
       <li><a href="#monitoring">- 모니터링 및 로깅</a></li>
     </ul>
     <br/>
