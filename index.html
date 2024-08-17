@@ -237,8 +237,11 @@
     }
 
     img {
-      max-width: 100%;
+      width: 90%; /* 이미지 너비를 줄여서 여백을 확보 */
       height: auto;
+      display: block;
+      margin: 0 auto; /* 이미지를 중앙에 배치 */
+      padding: 0 5%;
     }
 
   </style>
@@ -447,7 +450,6 @@
         <h3>ERD</h3>
         <div class="relative">
           <img src="erd.png" alt="erd" onclick="window.open(this.src)">
-          <span class="caption">클릭 시 원본 크기로 보실 수 있습니다.</span>
         </div>
         <h4>주요 테이블</h4>
         <div class="info-list">
@@ -480,7 +482,6 @@
         <h3>랜덤 추천 에세이</h3>
         <div class="recommend">
           <img src="recommend.png" alt="추천에세이시퀀스" onclick="window.open(this.src)">
-          <span class="caption">클릭 시 원본 크기로 보실 수 있습니다.</span>
         </div>
         <br>
         <br>
