@@ -137,6 +137,20 @@
       margin-top: 40px;
     }
 
+    .info-list {
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    .info-item {
+      margin-bottom: 5px;
+    }
+
+    .info-item2 {
+      margin-left: 15px;
+      margin-bottom: 5px;
+    }
+
     pre code {
       display: block;
       padding: 10px;
@@ -915,11 +929,60 @@ default ✓ [======================================] 000/800 VUs  29m0s</code></
             않도록 합니다. 이로 인해 공격자가 SQL 명령어가 포함된 코드를 삽입하더라도 그 값이 단순한 데이터로 처리되어 쿼리문 자체의 구조가 깨지지 않아 SQL 인젝션이 발생하지 않습니다.</p>
         </div>
       </section>
-      <!--      <section id="session-management">-->
-      <!--        <h3>로그인 및 세션 관리</h3>-->
-      <!--        <p>로그인 및 세션 관리 내용</p>-->
-      <!--      </section>-->
-    </section>
+      <br>
+      <section id="auth">
+        <h3>인증 및 토큰 관리</h3>
+        <h5>NestJS의 `Guard` 데코레이터를 이용해 인증/인가 로직을 구현했습니다. 이 가드는 HTTP 요청을 처리하기 전에 JWT 토큰의 유효성을 검사하고, 만료된 토큰을 처리하며 리프레쉬 토큰을 이용한 새로운 액세스 토큰 발급 과정에서 보안 강화를 위해 여러 가지 검사를 수행합니다. 특히, 비정상적인 접근 시도나 토큰 탈취 가능성에 대해 대응하기 위한 로직이 포함되어 있습니다.</h5>
+        <h4>자동 토큰 갱신을 통한 개발 편의성 향상</h4>
+        <div class="info-list">
+          <p class="info-item">보통의 경우 엑세스 토큰(AT)이 만료되면 클라이언트는 이 만료된 토큰을 감지하고 리프레쉬 토큰(RT)을 이용해 새로운 AT를 요청하는 절차를 따릅니다. 이는 프론트엔드에서 인가 절차를 처리해야 해야합니다.</p>
+          <p class="info-item">그러나 팀원들이 인가 절차에 신경을 쓰기보다는, 본인의 업무에 더 집중할 수 있도록 하기 위해 이 과정을 백엔드에서 자동으로 처리하고자 했습니다. 즉, AT가 만료된 경우에도 백엔드가 자동으로 요청 헤더에 포함된 RT를 사용해 AT를 갱신하도록 하여, 프론트에선 갱신된 AT만 감지하면 되도록 설계했습니다.</p>
+          <p class="info-item">이 접근 방식은 개발자들에게 편의성을 제공하며 전체적인 생산성을 높일 수 있다는 장점이 있었습니다. 하지만 이 과정에서 자연스럽게 몇가지 이슈가 발생할 수 있었습니다.</p>
+        </div>
+        <br>
+        <h4>동시성 이슈</h4>
+        <img src="동시성.png" alt="동시성" onclick="window.open(this.src)">
+        <div class="info-list">
+          <h5>중복 갱신</h5>
+          <p class="info-item">한 명의 사용자의 만료된 액세스 토큰을 가진 다수의 요청이 동시에 서버로 들어올 때, 각 요청이 리프레쉬 토큰(RT)을 사용하여 새로운 AT를 발급받으려고 시도할 수 있습니다. 이런 경우 중복된 갱신 요청이 발생하여 서버 자원이 낭비될 뿐만 아니라 의도하지 않은 동작을 유발할 수 있었습니다.</p>
+          <p class="info-item">이를 해결하기 위해 갱신 중 상태 관리를 도입했습니다. Redis를 사용해 특정 RT가 이미 갱신 중인 상태임을 저장하고, 이 키가 설정된 동안에는 중복된 갱신 요청을 잠시 대기시켜 갱신 작업이 완료된 후 캐싱된 새로운 AT를 사용하도록 처리했습니다.</p>
+        </div>
+        <br>
+        <div class="info-list">
+          <h5>최근 갱신된 토큰 캐싱을 통한 사용자 경험 개선</h5>
+          <p class="info-item">중복 갱신 이슈는 해결되었지만, 여기서 또 다른 문제가 발생했습니다. 중복 갱신을 막기 위한 로직으로 인해 또 다른 요청이 RT를 사용할 때, 이미 사용된 RT가 다시 사용될 수 없다는 점이 문제가 되었습니다. 이로 인해 후속 요청들은 <code>UNAUTHORIZED</code> 오류를 반환하게 되었고, 이는 사용자 경험에 부정적인 영향을 미쳤습니다.</p>
+          <p class="info-item">이를 해결하기 위해 최근 갱신된 토큰 캐싱을 도입했습니다. 갱신된 새로운 AT는 5초 동안 Redis에 캐싱하여, 이 시간 동안 들어오는 후속 요청들이 이 갱신된 토큰을 사용할 수 있도록 했습니다. 이렇게 함으로써 사용자 입장에서 여러 요청이 동시다발적으로 발생하더라도 첫 번째 요청이 정상적으로 처리된 후에도 모든 요청이 동일한 갱신된 토큰을 사용해 정상적으로 처리될 수 있도록 했습니다.</p>
+        </div>
+        <br>
+        <h4>토큰 버전 관리</h4>
+        <img src="tokenversion.png" alt="tokenversion" onclick="window.open(this.src)">
+        <div class="info-list">
+          <p class="info-item">초기에는 비정상적인 접근이 감지되었을 때, Redis를 사용하여 해당 RT를 블랙리스트 처리하는 방식을 사용했습니다. 하지만 이 방식은 메모리 캐시 사용량을 점진적으로 증가시키는 문제가 있었습니다.</p>
+          <p class="info-item">이에 따라 토큰 버전 관리를 도입하게 되었습니다. 사용자 엔터티에 tokenVersion이라는 프로퍼티를 추가하여 비정상적인 접근이 감지되거나 디바이스 불일치가 확인된 경우 이 버전을 증가시킵니다. 그러하여 검증에서 현재 사용자의 토큰 버전과 이전에 발급된 RT의 토큰 버전을 비교하여 불일치시 무효화되며, 사용자는 다시 로그인하여 새로운 RT를 발급받아야 합니다.</p>
+          <p class="info-item">이 방식은 Redis의 메모리 사용량을 줄이면서도 보안 측면에서 높은 효율성을 유지할 수 있도록 했습니다. 블랙리스트 처리 방식 대신 토큰 자체의 버전을 관리함으로써 추가적인 메모리 사용 없이도 RT를 무효화할 수 있는 방법을 제공했습니다.</p>
+        </div>
+        <br>
+        <h4>구현 로직</h4>
+        <div class="info-list">
+          <p class="info-item"><strong>1. 퍼블릭 엔드포인트 확인</strong></p>
+          <p class="info-item2">요청된 엔드포인트가 공개 상태인지 확인합니다. 이는 인가가 불필요한 경로에 커스텀 데코레이터로 메타데이터를 조작하고, 해당 데코레이터가 적용된 경로는 요청을 통과시킵니다. 이를 위해 <code>Reflector</code>를 사용하여 엔드포인트에 설정된 메타데이터를 확인합니다.</p>
+          <p class="info-item"><strong>2. Authorization 헤더 확인</strong></p>
+          <p class="info-item2">요청에 <code>Authorization</code> 헤더가 포함되어 있는지 확인합니다. 헤더가 없다면 인증이 필요함을 사용자에게 알립니다.</p>
+          <p class="info-item"><strong>3. JWT 검증</strong></p>
+          <p class="info-item2">헤더에서 JWT를 추출해 토큰의 유효성을 검증합니다. 만약 토큰이 만료되었거나 유효하지 않은 경우, <code>TokenExpiredError</code> 또는 기타 오류가 발생하게 됩니다.</p>
+          <p class="info-item"><strong>4. 만료된 토큰 처리</strong></p>
+          <p class="info-item2">토큰이 만료된 경우 다음 로직을 거치게 됩니다.</p>
+          <p class="info-item2"><strong>1. 리프레쉬 토큰 검증: </strong>요청 헤더에서 <code>x-refresh-token</code>을 추출하여 리프레쉬 토큰의 유효성을 검증합니다.</p>
+          <p class="info-item2"><strong>2. 동시성 이슈 해결: </strong>최근 5초 이내에 동일한 리프레쉬 토큰을 사용해 갱신된 엑세스 토큰이 있는지 확인합니다. 있다면 해당 토큰을 이용해 요청을 정상처리합니다. 이는 만료된 AT를 이용한 비동기 호출 동시성 문제를 해결합니다.</p>
+          <p class="info-item2"><strong>3. 토큰 버전 관리: </strong>리프레쉬 토큰의 버전이 사용자 데이터와 일치하는지 확인합니다. 일치하지 않는다면, 비정상적인 접근으로 간주하고 인가를 거부합니다.</p>
+          <p class="info-item2"><strong>4. 디바이스 검증: </strong>현재 요청된 디바이스 정보가 리프레쉬 토큰을 발급받은 디바이스와 일치하는지 확인합니다. 일치하지 않는 경우 토큰 버전을 증가시키고 사용자 관련 캐시 데이터를 삭제하여 해당 리프레쉬 토큰을 무효화합니다.</p>
+          <p class="info-item2"><strong>5. 캐시된 RT 확인: </strong>AT의 유효기간은 30분으로, RT는 30분 이내에 한 번만 사용됩니다. 리프레쉬 토큰 사용 시간을 캐싱하여 30분 이내에 재사용이 되는 경우, 토큰 버전을 증가시키고 캐시된 데이터를 삭제해 토큰 탈취나 남용을 방지합니다.</p>
+          <p class="info-item2"><strong>6. AT 갱신: </strong>RT가 유효하고, 모든 검사를 통과한 경우 새로운 AT를 응답 헤더에 추가하고 요청을 정상처리합니다. 이 때 새로운 AT를 5초간 캐싱하여 <code>2. 동시성 이슈 해결</code> 에 사용됩니다.</p>
+        </div>
+        <h4>전체 시퀀스</h4>
+        <img src="auth.png" alt="가드시퀀스" onclick="window.open(this.src)">
+      </section>
+      <br>
     <br/>
     <section id="devops">
       <h2>▣ DevOps 및 배포</h2>
@@ -1157,7 +1220,7 @@ default ✓ [======================================] 000/800 VUs  29m0s</code></
     <ul>
       <li><a href="#data-protection">- 데이터 보호</a></li>
       <li><a href="#input-validation">- 입력 검증</a></li>
-      <!--      <li><a href="#session-management">- 로그인 및 세션 관리</a></li>-->
+      <li><a href="#auth">- 인증 및 토큰 관리</a></li>
     </ul>
     <br/>
     <li><a class="main-category" href="#devops">DevOps 및 배포</a></li>
